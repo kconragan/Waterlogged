@@ -2,6 +2,8 @@ express = require("express")
 swig = require("swig")
 routes = require("./routes")
 app = module.exports = express.createServer()
+mongoose = require("mongoose")
+
 app.configure ->
   swig.init
     root: __dirname + "/views"
@@ -17,14 +19,16 @@ app.configure ->
   app.use express.static(__dirname + "/public")
 
 app.configure "development", ->
+  mongoose.connect 'mongodb://localhost/waterlogged-dev'
   app.use express.errorHandler(
     dumpExceptions: true
     showStack: true
   )
 
 app.configure "production", ->
+  mongoose.connect 'mongodb://localhost/waterlogged'
   app.use express.errorHandler()
-
+  
 app.get "/", routes.index
 app.get "/post/new", routes.newPost
 app.post "/post/new", routes.addPost

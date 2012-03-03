@@ -1,21 +1,19 @@
-posts = []
+Post = require '../models/Post'
 
 module.exports = 
   index: (req, res) ->
-    res.render "index.html",
-      title: "Waterlogged"
-      posts: posts 
+    Post.find {}, (err, posts) ->
+      res.render "index.html",
+        title: "Waterlogged"
+        posts: posts
 
   newPost: (req, res) ->
-    res.render "log_session.html", title:"Write New Post"
+    res.render 'log_session.html', title:"Log a new surf session"
 
   addPost: (req, res) ->
-    post = req.body.post
-    post.id = posts.length
-    posts.push post
-    res.redirect "/"
+    new Post(req.body.post).save ->
+      res.redirect "/"
 
   viewPost: (req, res) ->
-    post = posts[req.params.id]
-    res.render 'post', post: post, title: post.title
-
+    Post.findById req.params.id, (err, post) ->
+      res.render 'post', post: post, title: post.title

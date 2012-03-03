@@ -3,4 +3,7 @@
 {% block title %}Home Page{% endblock %}
 {% block body %}
   <a href="/post/new/">Log new surf session</a>
+  {% for post in posts %}
+    {{ post.title }}
+  {% endfor %}
 {% endblock %}
