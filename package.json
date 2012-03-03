@@ -1,20 +1,23 @@
 {
-  "name": "waterlogged",
-  "version": "0.0.1",
-  "private": true,
-  "dependencies": {
-    "express": "2.5.5",
-    "mustache": ">= 0.0.1"
+  'name': 'waterlogged',
+  'version': '0.0.1',
+  'private': true,
+  'dependencies': {
+    'express': '2.5.5',
+    'mustache': '>= 0.0.1',
+    'less': '>=1.2.1',
+    'swig': '>=0.8.0',
+    'mongoose': '>=2.5.1'
   },
-  "devDependencies": {},
-  "engines": {
-    "node": "*"
+  'devDependencies': {},
+  'engines': {
+    'node': '*'
   },
-  "author": "Kai Conragan <kai.conragan@gmail.com>",
-  "description": "A surf log",
-  "homepage": "http://github.com/kconragan/waterlogged",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/kconragan/Waterlogged.git"
+  'author': 'Kai Conragan <kai.conragan@gmail.com>',
+  'description': 'A surf log',
+  'homepage': 'http://github.com/kconragan/waterlogged',
+  'repository': {
+    'type': 'git',
+    'url': 'git://github.com/kconragan/Waterlogged.git'
   }
 }
