@@ -1,4 +1,5 @@
 Post = require '../models/Post'
+Surf = require '../models/Surf'
 
 module.exports = 
   index: (req, res) ->
