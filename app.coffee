@@ -1,18 +1,15 @@
-express = require("express")
-swig = require("swig")
-routes = require("./routes")
+express = require 'express'
+mongoose = require 'mongoose'
 app = module.exports = express.createServer()
-mongoose = require("mongoose")
+routes = require './routes'
+jinjs = require 'jinjs'
+everyauth = require 'everyauth'
+Promise = everyauth.Promise
 
 app.configure ->
-  swig.init
-    root: __dirname + "/views"
-    allowErrors: true
   app.set "views", __dirname + "/views"
-  app.register ".html", swig
-  app.set "view engine", "swig"
-  app.set "view options",
-    layout: false
+  app.register ".html", jinjs
+  app.set "view engine", "jinjs"
   app.use express.bodyParser()
   app.use express.methodOverride()
   app.use app.router
