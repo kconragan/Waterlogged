@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+
+{% block title %}Buoys{% endblock %}
+{% block body %}
+<section>
+  <h1>Add a new buoy</h1>
+  <form action="/buoy" method="post">
+  <label>
+    Name
+    <input type="text" name="wave[name]" value="" />
+  </label>
+  <button>Create</button>
+  </form>
+</section>
+  <h1>Buoys</h1>
+  {% for buoy in buoys %}
+    {{ buoy.name }}
+  {% endfor %}
+{% endblock %}
