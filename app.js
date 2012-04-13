@@ -44,5 +44,10 @@ app.get  ('/buoys', routes.listBuoys);
 app.post ('/buoys', routes.createBuoy);
 app.get  ('/buoys/:id', routes.getBuoy);
 
+// Waves
+app.get  ('/waves', routes.listWaves);
+app.post ('/waves', routes.createWave);
+app.get  ('/waves/:id', routes.getWave);
+
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

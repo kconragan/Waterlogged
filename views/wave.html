@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block title %} {{wave.name}} {% endblock %}
+
+{% block body %}
+ <h1>
+   {{ wave.name }}
+ </h1>
+ <p>{{ wave.location.lng }}, {{ wave.location.lat }}</p>
+  <p>
+    <a href="/waves">waves</a>
+  </p>
+
+  {% for buoy in buoys %}
+    {{ buoy }}
+  {% endfor %}
+{% endblock %}

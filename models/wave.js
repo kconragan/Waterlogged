@@ -11,7 +11,10 @@ var Wave = new Schema({
     lng: Number,
     lat: Number
   },
-  buoys: [Buoy],
+  buoys: [{
+    type: Schema.ObjectId,
+    ref: Buoy
+  }],
   secret: Boolean
 });
 module.exports = mongoose.model('Wave', Wave);

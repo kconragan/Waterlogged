@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{% block title %}waves{% endblock %}
+{% block body %}
+<section>
+  <h1>Add a new wave</h1>
+  <form action="" method="post">
+  <label>
+    Name
+    <input type="text" name="wave[name]" value="" />
+  </label>
+  <fieldset>
+    <h2>Location</h2>
+    <label>
+      Longitude
+      <input type="text" name="wave[location][lng]" />
+    </label>
+    <label>
+      Latitude
+      <input type="text" name="wave[location][lat]" />
+    </label>
+  </fieldset>
+  <fieldset>
+    <label>
+      <select name="wave[closest_buoy]">
+        {% for buoy in buoys %} 
+          <option value="{{ buoy.id }}">{{ buoy.name }}</option>
+        {% endfor %}
+      </select>
+    </label>
+  </fieldset>
+  <button>Create</button>
+  </form>
+</section>
+  <h1>waves</h1>
+  <ul>
+    {% for wave in waves %}
+    <li><a href="/waves/{{ wave.id }}">{{ wave.name }}</a></li>
+    {% endfor %}
+  </ul>
+  <p>
+    <a href="/waves">waves</a>
+  </p>
+{% endblock %}

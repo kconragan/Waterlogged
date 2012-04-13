@@ -16,10 +16,10 @@ exports.listBuoys = function(req, res) {
 
 exports.createBuoy = function(req, res) {
     var buoy = new Buoy({
-      "name": req.body.wave.name,
-      "location": {
-        "lng": req.body.wave.location.lng,
-        "lat": req.body.wave.location.lat
+      'name': req.body.buoy.name,
+      'location': {
+        'lng': req.body.buoy.location.lng,
+        'lat': req.body.buoy.location.lat
       }
     });
     console.log(buoy);
@@ -49,4 +49,52 @@ exports.getBuoy = function(req, res) {
       res.render('buoy.html', { buoy: buoy});
     }
   })
+};
+
+exports.listWaves = function(req, res) {
+  Wave.find(function(err, waves){
+    Buoy.find(function(err, buoys) {
+      res.render('list_waves.html', { 
+        title: 'Waves',
+        waves: waves,
+        buoys: buoys
+      });
+    });
+  });
+};
+
+exports.createWave = function(req, res) {
+  console.log(req.body);
+  var wave = new Wave({
+    'name': req.body.wave.name,
+    'location': {
+      'lng': req.body.wave.location.lng,
+      'lat': req.body.wave.location.lat
+    },
+    'buoys': req.body.wave.closest_buoy
+  })
+  wave.save(function(err) {
+    if(err) {
+      throw err;
+    } 
+    else {
+      Wave.findOne({ _id: wave.id }, function(err, wave) {
+        res.redirect('/waves/' + wave._id.toHexString())
+      });
+    }
+  });
+};
+
+exports.getWave = function(req, res) {
+  Wave.findOne({ _id: req.params.id }, function(err, wave) {
+    if(err) {
+      throw err;
+    } 
+    else {
+      console.log(wave);
+      res.render('wave.html', {
+        wave: wave
+      })
+    }
+  });
 };

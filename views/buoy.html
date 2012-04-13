@@ -3,9 +3,11 @@
 {% block title %} {{buoy.name}} {% endblock %}
 
 {% block body %}
- {{ buoy.name }}
+ <h1>
+   {{ buoy.name }}
+ </h1>
+ <p>{{ buoy.location.lng }}, {{ buoy.location.lat }}</p>
   <p>
     <a href="/buoys">Buoys</a>
   </p>
 {% endblock %}
-
