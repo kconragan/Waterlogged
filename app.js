@@ -40,8 +40,9 @@ app.configure('production', function(){
 app.get('/', routes.index);
 
 // Buoys
-app.get  ('/buoy', routes.listBuoys);
-app.post ('/buoy', routes.createBuoy);
+app.get  ('/buoys', routes.listBuoys);
+app.post ('/buoys', routes.createBuoy);
+app.get  ('/buoys/:id', routes.getBuoy);
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

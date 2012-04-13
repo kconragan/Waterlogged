@@ -4,16 +4,32 @@
 {% block body %}
 <section>
   <h1>Add a new buoy</h1>
-  <form action="/buoy" method="post">
+  <form action="" method="post">
   <label>
     Name
     <input type="text" name="wave[name]" value="" />
   </label>
+  <fieldset>
+    <h2>Location</h2>
+    <label>
+      Longitude
+      <input type="text" name="wave[location][lng]" />
+    </label>
+    <label>
+      Latitude
+      <input type="text" name="wave[location][lat]" />
+    </label>
+  </fieldset>
   <button>Create</button>
   </form>
 </section>
   <h1>Buoys</h1>
-  {% for buoy in buoys %}
-    {{ buoy.name }}
-  {% endfor %}
+  <ul>
+    {% for buoy in buoys %}
+    <li><a href="/buoys/{{ buoy.id }}">{{ buoy.name }}</a></li>
+    {% endfor %}
+  </ul>
+  <p>
+    <a href="/buoys">Buoys</a>
+  </p>
 {% endblock %}

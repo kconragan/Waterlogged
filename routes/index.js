@@ -15,10 +15,14 @@ exports.listBuoys = function(req, res) {
 };
 
 exports.createBuoy = function(req, res) {
-    console.log(req.body);
     var buoy = new Buoy({
-      "name": req.body.wave.name
+      "name": req.body.wave.name,
+      "location": {
+        "lng": req.body.wave.location.lng,
+        "lat": req.body.wave.location.lat
+      }
     });
+    console.log(buoy);
 
     buoy.save(function(err) {
       if(err) {
@@ -26,10 +30,23 @@ exports.createBuoy = function(req, res) {
         throw err;
       } 
       else {
-        Buoy.find({}, function(err, buoys) {
-          console.log(buoys);
-          res.render('list_buoys.html', {buoys: buoys});
+        Buoy.findOne({_id: buoy.id }, function(err, buoy) {
+          console.log(buoy);
+          res.redirect('/buoys/' + buoy._id.toHexString())
         });
       }
     });
+};
+
+exports.getBuoy = function(req, res) {
+  console.log(req.params.id);
+  Buoy.findOne({ _id: req.params.id}, function(err, buoy) {
+    if(err) {
+      throw err;
+    } 
+    else {
+      console.log(buoy);
+      res.render('buoy.html', { buoy: buoy});
+    }
+  })
 };
