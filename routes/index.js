@@ -86,15 +86,17 @@ exports.createWave = function(req, res) {
 };
 
 exports.getWave = function(req, res) {
-  Wave.findOne({ _id: req.params.id }, function(err, wave) {
-    if(err) {
-      throw err;
-    } 
-    else {
-      console.log(wave);
-      res.render('wave.html', {
-        wave: wave
-      })
-    }
+  Wave.findOne({ _id: req.params.id })
+      .populate('buoys')
+      .run(function(err, wave) {
+        if(err) {
+          throw err;
+        } 
+        else {
+          console.log(wave);
+          res.render('wave.html', {
+            wave: wave
+          })
+        }
   });
 };

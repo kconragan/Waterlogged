@@ -11,7 +11,8 @@
     <a href="/waves">waves</a>
   </p>
 
-  {% for buoy in buoys %}
-    {{ buoy }}
+  <h2>Nearby buoys</h2>
+  {% for buoy in wave.buoys %}
+    {{ buoy.name }}
   {% endfor %}
 {% endblock %}

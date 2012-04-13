@@ -13,7 +13,7 @@ var Wave = new Schema({
   },
   buoys: [{
     type: Schema.ObjectId,
-    ref: Buoy
+    ref: 'Buoy'
   }],
   secret: Boolean
 });
