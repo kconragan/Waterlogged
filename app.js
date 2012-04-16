@@ -49,5 +49,10 @@ app.get  ('/waves', routes.listWaves);
 app.post ('/waves', routes.createWave);
 app.get  ('/waves/:id', routes.getWave);
 
+// Surf Sessions
+app.get  ('/logs', routes.listLogs);
+app.post ('/logs', routes.createLog);
+app.get  ('/logs/:id', routes.getLog);
+
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

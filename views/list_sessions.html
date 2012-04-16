@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{ title }} {% endblock %}
+{% block body %}
+<section>
+  <h1>Log a new session</h1>
+  <form action="" method="post">
+  <label>
+    Name
+    <input type="text" name="buoy[name]" value="" />
+  </label>
+  <fieldset>
+    <h2>Location</h2>
+    <label>
+      Longitude
+      <input type="text" name="buoy[location][lng]" />
+    </label>
+    <label>
+      Latitude
+      <input type="text" name="buoy[location][lat]" />
+    </label>
+  </fieldset>
+  <button>Create</button>
+  </form>
+</section>
+{% endblock %}

@@ -1,5 +1,6 @@
 var Buoy = require('../models/buoy.js');
 var Wave = require('../models/wave.js');
+var SurfSession = require('../models/surfsession.js');
 
 console.log(Buoy, Wave);
 
@@ -98,5 +99,13 @@ exports.getWave = function(req, res) {
             wave: wave
           })
         }
+  });
+};
+
+exports.listLogs = function(req, res) {
+
+  SurfSession.find(function(err, log){
+    console.log(log);
+    res.render('list_sessions.html', { title: 'Latest Surf Sessions', log: log });
   });
 };
