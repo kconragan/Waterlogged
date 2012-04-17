@@ -51,7 +51,7 @@ app.get  ('/waves/:id', routes.getWave);
 
 // Surf Sessions
 app.get  ('/logs', routes.listLogs);
-app.post ('/logs', routes.createLog);
+app.post ('/logs', routes.createSesh);
 app.get  ('/logs/:id', routes.getLog);
 
 app.listen(3000);
