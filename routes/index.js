@@ -2,6 +2,8 @@ var Buoy = require('../models/buoy.js');
 var Wave = require('../models/wave.js');
 var SurfSession = require('../models/surfsession.js');
 
+var h = require('../lib/helpers.js');
+
 console.log(Buoy, Wave);
 
 exports.index = function(req, res){
@@ -103,9 +105,23 @@ exports.getWave = function(req, res) {
 };
 
 exports.listLogs = function(req, res) {
-
   SurfSession.find(function(err, log){
-    console.log(log);
-    res.render('list_sessions.html', { title: 'Latest Surf Sessions', log: log });
+    Wave.find(function(err, waves) {
+      res.render('list_sessions.html', { 
+        title: 'Latest Surf Sessions',
+        log: log,
+        waves: waves,
+      });
+    });
+  });
+};
+
+exports.createSesh = function(req, res) {
+  console.log(req.body);
+  var buoyId = '46237';
+  var seshDate = h.formatDate(req.body.date, req.body.time);
+  var buoyReading = h.parseBuoyData(buoyId);
+  var sesh = new SurfSession({
+  
   });
 };

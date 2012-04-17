@@ -5,22 +5,31 @@
 <section>
   <h1>Log a new session</h1>
   <form action="" method="post">
-  <label>
-    Name
-    <input type="text" name="buoy[name]" value="" />
-  </label>
-  <fieldset>
-    <h2>Location</h2>
-    <label>
-      Longitude
-      <input type="text" name="buoy[location][lng]" />
-    </label>
-    <label>
-      Latitude
-      <input type="text" name="buoy[location][lat]" />
-    </label>
-  </fieldset>
-  <button>Create</button>
+    <fieldset>
+      <h2>When</h2>
+      <label>
+        Date
+        <input type="date" name="date" />
+      </label>
+      <label>
+        Time
+        <input type="time" name="time" />
+      </label>
+      <label>
+        How long did you surf?
+        <input type="number" min="1" max="240" name="duration" />
+        minutes
+      </label>
+    </fieldset>
+    <fieldset>
+      <h2>Where</h2>
+      <select name="wave">
+        {% for w in waves %}
+        <option value="{{w.id}}">{{ w.name }}</option>
+        {% endfor %}
+      </select>
+    </fieldset>
+    <button>Create</button>
   </form>
 </section>
 {% endblock %}
