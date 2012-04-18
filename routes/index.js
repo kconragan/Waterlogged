@@ -126,13 +126,14 @@ exports.createSesh = function(req, res) {
   // 4. Attach to SurfSession
   // 5. Save & take to new object
 
-  var sesh = new SurfSession({});
+  //var sesh = new SurfSession({});
 
   // this should get the correct buoy readings to be inserted
   // into the SurfSession.buoys object
   var buoyId = '46237'; // hardcoded for testing
-  var buoyReading = Q.node(h.parseBuoyData(buoyId));
-  console.log('returned data is: ', buoyReading);
+  h.parseBuoyData(buoyId).then(function(data) {
+    res.send(data);
+  }).end()
 
   // fill in sesh.buoys with returned data
   // sesh.save();
