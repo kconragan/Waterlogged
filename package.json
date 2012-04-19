@@ -1,7 +1,4 @@
 {
-  "name": "Waterlog",
-  "version": "0.0.1",
-  "private": true,
   "dependencies": {
     "express": ">= 2.5",
     "mongoose": ">= 2.5.13",
@@ -11,5 +8,11 @@
     "moment": ">= 1.5.1",
     "request": ">= 2.9.202",
     "q": ">= 0.8.2"
-  }
+  },
+  "name": "Waterlog",
+  "private": true,
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter list"
+  },
+  "version": "0.0.1"
 }
