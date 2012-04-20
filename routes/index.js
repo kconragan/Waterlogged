@@ -5,15 +5,13 @@ var SurfSession = require('../models/surfsession.js');
 var h = require('../lib/helpers.js');
 var Q = require('q');
 
-console.log(Buoy, Wave);
 
 exports.index = function(req, res){
-  res.render('index.html', { title: 'Express' })
+  res.render('index.html', { title: 'Waterlogged' })
 };
 
 exports.listBuoys = function(req, res) {
   Buoy.find(function(err, buoys){
-    console.log(buoys);
     res.render('list_buoys.html', { title: 'Buoys', buoys: buoys });
   });
 };
@@ -26,7 +24,6 @@ exports.createBuoy = function(req, res) {
         'lat': req.body.buoy.location.lat
       }
     });
-    console.log(buoy);
 
     buoy.save(function(err) {
       if(err) {
@@ -35,7 +32,6 @@ exports.createBuoy = function(req, res) {
       } 
       else {
         Buoy.findOne({_id: buoy.id }, function(err, buoy) {
-          console.log(buoy);
           res.redirect('/buoys/' + buoy._id.toHexString())
         });
       }
@@ -43,13 +39,11 @@ exports.createBuoy = function(req, res) {
 };
 
 exports.getBuoy = function(req, res) {
-  console.log(req.params.id);
   Buoy.findOne({ _id: req.params.id}, function(err, buoy) {
     if(err) {
       throw err;
     } 
     else {
-      console.log(buoy);
       res.render('buoy.html', { buoy: buoy});
     }
   })
@@ -68,7 +62,6 @@ exports.listWaves = function(req, res) {
 };
 
 exports.createWave = function(req, res) {
-  console.log(req.body);
   var wave = new Wave({
     'name': req.body.wave.name,
     'location': {
@@ -97,7 +90,6 @@ exports.getWave = function(req, res) {
           throw err;
         } 
         else {
-          console.log(wave);
           res.render('wave.html', {
             wave: wave
           })
