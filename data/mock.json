@@ -1,0 +1,675 @@
+var waves = [
+  {
+    "name": "Ocean Beach",
+    "location": {
+      "lng": -122.51039564609528,
+      "lat": 37.75274385289523
+    },
+    buoys: ['46237', '46026', '46059'],
+    secret: false
+  },
+  {
+    "name": "Montara",
+    "location": {
+      "lng": -122.51638770103455,
+      "lat": 37.54601493487623 
+    },
+    buoys: ['46012', '46237', '46059'],
+    secret: false
+  },
+  {
+    "name": "Privates",
+    "location": {
+      "lng": -122.50431776046753,
+      "lat": 37.504485226783984 
+    },
+    buoys: ['46012', '46237', '46059'],
+    secret: true
+  },
+  {
+    "name": "Rockaway",
+    "location": {
+      "lng": -122.49908208847046,
+      "lat": 37.6082990726275 
+    },
+    buoys: ['46012', '46237', '46059'],
+    secret: false
+  },
+  {
+    "name": "Sharp Park Pier",
+    "location": {
+      "lng": -122.49639987945557,
+      "lat": 37.63258638348138 
+    },
+    buoys: ['46237', '46026' '46059'],
+    secret: false
+  },
+  {
+    "name": "North Linda Mar",
+    "location": {
+      "lng": -122.50221490859985,
+      "lat": 37.602264255657865 
+    },
+    buoys: ['46237', '46026' '46059'],
+    secret: false
+  },
+  {
+    "name": "Ross' Cove",
+    "location": {
+      "lng": -122.50160872936249, 
+      "lat": 37.49954428463673 
+    },
+    buoys: ['46012', '46237', '46059'],
+    secret: false
+  },
+  {
+    "name": "The Jetty",
+    "location": {
+      "lng": -122.47164309024811, 
+      "lat": 37.5003060877343 
+    },
+    buoys: ['46012', '46237', '46059'],
+    secret: false
+  },
+  {
+    "name": "Venice / Roosevelt",
+    "location": {
+      "lng": -122.47164309024811, 
+      "lat": 37.5003060877343 
+    },
+    buoys: ['46012', '46237', '46059'],
+    secret: false
+  },
+  {
+    "name": "Kelly Street",
+    "location": {
+      "lng": -122.4482274055481, 
+      "lat": 37.46613860234406 
+    },
+    buoys: ['46012', '46237', '46059'],
+    secret: false
+  },
+  {
+    "name": "North Point, Davenport",
+    "location": {
+      "lng": -122.2213339805603, 
+      "lat": 37.02420128313919 
+    },
+    buoys: [],
+    secret: false
+  },
+  {
+    "name": "Davenport",
+    "location": {
+      "lng": -122.21661329269409, 
+      "lat": 37.02133171897447 
+    },
+    buoys: [],
+    secret: false
+  },
+  {
+    "name": "Scott's Creek",
+    "location": {
+      "lng": -122.23448753356934, 
+      "lat": 37.04130506287026 
+    },
+    buoys: [],
+    secret: false
+  },
+  {
+    "name": "4-Mile",
+    "location": {
+      "lng": -122.12472081184387, 
+      "lat": 36.96534069928218 
+    },
+    buoys: [],
+    secret: true
+  },
+  {
+    "name": "3-Mile",
+    "location": {
+      "lng": -122.11785435676575, 
+      "lat": 36.961457333070435 
+    },
+    buoys: [],
+    secret: true
+  },
+  {
+    "name": "Waddel Reef",
+    "location": {
+      "lng": -122.27701663970947, 
+      "lat": 37.08873353618568 
+    },
+    buoys: [],
+    secret: true
+  },
+  {
+    "name": "Waddel Creek",
+    "location": {
+      "lng": -122.28542804718018, 
+      "lat": 37.09991000798867 
+    },
+    buoys: [],
+    secret: true
+  }
+];
+
+var surfSessions: [
+	{
+		"location": "Montara",
+		"date": "Mon Mar 26 22:58:00 UTC 2012"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Fri Mar 23 18:58:00 UTC 2012"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Fri Mar 09 17:23:00 UTC 2012"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sun Mar 04 23:23:00 UTC 2012"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sat Mar 03 18:23:00 UTC 2012"
+	},
+	{
+		"location": "4-Mile",
+		"date": "Sun Feb 26 18:06:00 UTC 2012"
+	},
+	{
+		"location": "Linda Mar",
+		"date": "Mon Feb 20 17:14:00 UTC 2012"
+	},
+	{
+		"location": "Rockaway",
+		"date": "Sun Feb 12 19:34:00 UTC 2012"
+	},
+	{
+		"location": "Venice / Roosevelt",
+		"date": "Sun Feb 05 21:34:00 UTC 2012"
+	},
+	{
+		"location": "Sharp Park Pier",
+		"date": "Fri Feb 03 21:34:00 UTC 2012"
+	},
+	{
+		"location": "Sharp Park Pier",
+		"date": "Sun Jan 15 00:18:00 UTC 2012"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sat Jan 14 19:38:00 UTC 2012"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Fri Jan 13 15:38:00 UTC 2012"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Wed Jan 11 19:31:51 UTC 2012"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Mon Jan 09 15:48:00 UTC 2012"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Mon Jan 02 19:48:00 UTC 2012"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sun Jan 01 19:15:00 UTC 2012"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sat Dec 31 20:14:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sun Dec 25 20:22:00 UTC 2011"
+	},
+	{
+		"location": "Privates",
+		"date": "Sat Dec 24 19:07:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Fri Dec 23 00:01:00 UTC 2011"
+	},
+	{
+		"location": "Privates",
+		"date": "Wed Dec 21 15:13:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sun Dec 18 00:47:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Thu Dec 15 15:43:00 UTC 2011"
+	},
+	{
+		"location": "Privates",
+		"date": "Sun Dec 11 17:15:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sat Dec 10 19:15:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sun Dec 04 20:37:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sat Dec 03 19:37:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Fri Dec 02 15:37:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sun Nov 27 20:58:00 UTC 2011"
+	},
+	{
+		"location": "Privates",
+		"date": "Sat Nov 26 18:19:00 UTC 2011"
+	},
+	{
+		"location": "Privates",
+		"date": "Fri Nov 25 17:58:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sun Nov 20 18:25:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Mon Nov 14 00:59:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sun Nov 06 18:20:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Wed Nov 02 19:21:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Mon Oct 31 02:12:45 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sun Oct 30 00:02:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Thu Oct 27 14:30:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Wed Oct 26 14:30:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sun Oct 23 20:57:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sat Oct 22 00:57:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sun Oct 16 22:44:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sat Oct 15 15:44:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Fri Oct 14 14:04:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Mon Oct 10 02:53:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sun Oct 09 01:46:06 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sun Oct 02 14:30:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sat Oct 01 14:32:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Wed Sep 21 17:09:41 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Tue Sep 20 17:38:45 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sun Sep 11 18:19:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Wed Sep 07 03:09:23 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Tue Sep 06 00:34:29 UTC 2011"
+	},
+	{
+		"location": "Waddell Creek",
+		"date": "Sun Sep 04 17:25:00 UTC 2011"
+	},
+	{
+		"location": "Waddell Creek",
+		"date": "Fri Sep 02 22:37:00 UTC 2011"
+	},
+	{
+		"location": "Ross's Cove",
+		"date": "Thu Sep 01 15:42:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sun Aug 28 14:46:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Thu Aug 25 00:44:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Wed Aug 24 01:06:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Wed Aug 17 14:16:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Tue Aug 16 02:00:00 UTC 2011"
+	},
+	{
+		"location": "Montara",
+		"date": "Sun Aug 14 16:44:00 UTC 2011"
+	},
+	{
+		"location": "Montara",
+		"date": "Sat Aug 13 18:09:29 UTC 2011"
+	},
+	{
+		"location": "Montara",
+		"date": "Sun Jul 31 14:30:00 UTC 2011"
+	},
+	{
+		"location": "Montara",
+		"date": "Sat Jul 30 20:46:09 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Mon Jul 18 02:12:59 UTC 2011"
+	},
+	{
+		"location": "Conejo, Salina Cruz",
+		"date": "Sat Jun 18 03:36:04 UTC 2011"
+	},
+	{
+		"location": "Conejo, Salina Cruz",
+		"date": "Fri Jun 17 17:04:00 UTC 2011"
+	},
+	{
+		"location": "Conejo, Salina Cruz",
+		"date": "Thu Jun 16 19:27:18 UTC 2011"
+	},
+	{
+		"location": "Conejo, Salina Cruz",
+		"date": "Thu Jun 16 02:31:03 UTC 2011"
+	},
+	{
+		"location": "Punta Chipehua, Salina Cruz",
+		"date": "Wed Jun 15 20:30:45 UTC 2011"
+	},
+	{
+		"location": "Conejo, Salina Cruz",
+		"date": "Wed Jun 15 03:41:58 UTC 2011"
+	},
+	{
+		"location": "Bamba, Salina Cruz",
+		"date": "Tue Jun 14 18:43:00 UTC 2011"
+	},
+	{
+		"location": "Bamba, Salina Cruz",
+		"date": "Tue Jun 14 15:43:00 UTC 2011"
+	},
+	{
+		"location": "Conejo, Salina Cruz",
+		"date": "Tue Jun 14 03:42:00 UTC 2011"
+	},
+	{
+		"location": "Bamba, Salina Cruz",
+		"date": "Mon Jun 13 17:43:00 UTC 2011"
+	},
+	{
+		"location": "Conejo, Salina Cruz",
+		"date": "Mon Jun 13 03:42:00 UTC 2011"
+	},
+	{
+		"location": "San Diego, Salina Cruz",
+		"date": "Sun Jun 12 15:44:00 UTC 2011"
+	},
+	{
+		"location": "Conejo, Salina Cruz",
+		"date": "Sun Jun 12 01:42:00 UTC 2011"
+	},
+	{
+		"location": "Montara",
+		"date": "Sat Jun 04 23:50:13 UTC 2011"
+	},
+	{
+		"location": "Montara",
+		"date": "Sat May 28 16:01:00 UTC 2011"
+	},
+	{
+		"location": "Montara",
+		"date": "Fri May 27 16:01:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sun May 15 01:45:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sat May 14 19:45:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Thu May 05 01:15:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sun May 01 22:46:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sat Apr 23 16:39:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Tue Apr 19 14:21:00 UTC 2011"
+	},
+	{
+		"location": "Montara",
+		"date": "Sun Apr 17 00:19:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sat Apr 16 02:17:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Thu Apr 14 15:15:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Mon Apr 11 14:16:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sun Apr 10 15:31:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Tue Apr 05 00:47:00 UTC 2011"
+	},
+	{
+		"location": "4-Mile",
+		"date": "Sat Apr 02 15:54:00 UTC 2011"
+	},
+	{
+		"location": "Rockaway",
+		"date": "Sun Mar 27 22:58:00 UTC 2011"
+	},
+	{
+		"location": "Ross's Cove",
+		"date": "Sat Mar 12 19:14:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sat Mar 05 22:36:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Fri Mar 04 18:31:55 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Mon Feb 28 02:41:43 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sun Feb 27 00:17:32 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Fri Feb 11 15:42:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Thu Feb 10 15:42:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Wed Feb 02 15:30:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Tue Feb 01 15:04:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sat Jan 29 22:34:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Fri Jan 28 15:39:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Wed Jan 26 15:58:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Tue Jan 25 15:58:00 UTC 2011"
+	},
+	{
+		"location": "Scott's Creek",
+		"date": "Sun Jan 23 22:43:00 UTC 2011"
+	},
+	{
+		"location": "North Point, Davenport",
+		"date": "Sat Jan 22 22:43:00 UTC 2011"
+	},
+	{
+		"location": "Ross's Cove",
+		"date": "Mon Jan 17 17:01:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Fri Jan 14 15:36:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Mon Jan 10 15:00:00 UTC 2011"
+	},
+	{
+		"location": "Kelly Street",
+		"date": "Sun Jan 09 18:56:00 UTC 2011"
+	},
+	{
+		"location": "Venice / Roosevelt",
+		"date": "Mon Jan 03 20:14:00 UTC 2011"
+	},
+	{
+		"location": "Privates",
+		"date": "Mon Jan 03 18:00:00 UTC 2011"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sun Sep 27 17:28:00 UTC 2009"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sat Sep 26 17:28:00 UTC 2009"
+	},
+	{
+		"location": "Privates",
+		"date": "Mon Sep 07 18:16:00 UTC 2009"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Fri Aug 28 19:21:13 UTC 2009"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Fri Aug 21 18:13:00 UTC 2009"
+	},
+	{
+		"location": "Pomponio",
+		"date": "Tue Aug 18 21:12:31 UTC 2009"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sun Aug 16 21:09:00 UTC 2009"
+	},
+	{
+		"location": "Waddell Creek",
+		"date": "Sat Jul 25 20:58:00 UTC 2009"
+	},
+	{
+		"location": "Waddell Creek",
+		"date": "Sat Jun 27 19:22:00 UTC 2009"
+	},
+	{
+		"location": "Ocean Beach",
+		"date": "Sun Feb 08 00:25:31 UTC 2009",
+		"undefined": "6.0"
+	},
+	{
+		"location": "Natural Bridges",
+		"date": "Sun Feb 08 00:25:19 UTC 2009"
+	}
+];
