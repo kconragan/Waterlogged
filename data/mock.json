@@ -154,6 +154,36 @@ var waves = [
   }
 ];
 
+var buoys = [
+  {
+    "name": "Station 46237 - san francisco bar, ca (142)" ,
+    "mid": "/m/0dj3wdh",
+    "cdipId": "46237",
+    "location": {
+      "lng": -122.59970784187317,
+      "lat": 37.780670531492106 
+    }
+  },
+  {
+    "name": "24NM South Southwest of San Francisco, CA" ,
+    "mid": "/m/0dj3tkm",
+    "cdipId": "46012",
+    "location": {
+      "lng": -122.88139343261719,
+      "lat": 37.63380988687154 
+    }
+  },
+  {
+    "name": "357NM West of San Francisco, CA" ,
+    "mid": "/m/0dj3v67",
+    "cdipId": "46059",
+    "location": {
+      "lng": -129.05914306640625,
+      "lat": 38.47455675836861 
+    }
+  },
+];
+
 var surfSessions: [
 	{
 		"location": "Montara",
