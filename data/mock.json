@@ -182,6 +182,15 @@ var buoys = [
       "lat": 38.47455675836861 
     }
   },
+  {
+    "name": "Station 46026 - 18NM West of San Francisco, CA" ,
+    "mid": "/m/0dj3tt0",
+    "cdipId": "46026",
+    "location": {
+      "lng": -122.833333 
+      "lat": 37.758889
+    }
+  }
 ];
 
 var surfSessions: [

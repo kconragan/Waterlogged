@@ -40,9 +40,10 @@ app.configure('production', function(){
 app.get('/', routes.index);
 
 // Buoys
-app.get  ('/buoys', routes.listBuoys);
-app.post ('/buoys', routes.createBuoy);
-app.get  ('/buoys/:id', routes.getBuoy);
+app.get    ('/buoys', routes.listBuoys);
+app.get    ('/buoys/:id', routes.getBuoy);
+app.post   ('/buoys', routes.createBuoy);
+app.delete ('/buoys/:id', routes.deleteBuoy);
 
 // Waves
 app.get  ('/waves', routes.listWaves);

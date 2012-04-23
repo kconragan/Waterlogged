@@ -9,6 +9,14 @@
     Name
     <input type="text" name="buoy[name]" value="" />
   </label>
+  <label>
+    Freebase mid
+    <input type="text" name="buoy[mid]" value="" />
+  </label>
+  <label>
+    NDBC ID
+    <input type="text" name="buoy[cdipId]" value="" />
+  </label>
   <fieldset>
     <h2>Location</h2>
     <label>
@@ -26,7 +34,13 @@
   <h1>Buoys</h1>
   <ul>
     {% for buoy in buoys %}
-    <li><a href="/buoys/{{ buoy.id }}">{{ buoy.name }}</a></li>
+    <li>
+      <a href="/buoys/{{ buoy.id }}">{{ buoy.name }}</a>
+      <form action="/buoys/{{ buoy.id }}" method="post">
+        <input type="hidden" value="DELETE" name="_method" />
+        <button class="btn delete">delete</button>
+      </form>
+    </li>
     {% endfor %}
   </ul>
 {% endblock %}

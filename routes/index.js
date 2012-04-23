@@ -38,6 +38,19 @@ exports.createBuoy = function(req, res) {
     });
 };
 
+exports.deleteBuoy = function(req, res) {
+  Buoy.findOne({ _id: req.params.id}, function(err, buoy){
+    if(err) {
+      throw err;
+    }
+    else {
+      buoy.remove(function() {
+        res.redirect('/buoys');
+      });
+    }
+  })
+};
+
 exports.getBuoy = function(req, res) {
   Buoy.findOne({ _id: req.params.id}, function(err, buoy) {
     if(err) {
