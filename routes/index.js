@@ -76,19 +76,19 @@ exports.listWaves = function(req, res) {
 };
 
 exports.createWave = function(req, res) {
-  var buoys = [];
-  for(i=0; i < req.body.wave.buoys.length; i++) {
-    buoys.push(req.body.wave.buoys[i]);
-  }
+  var w = req.body.wave;
+
   var wave = new Wave({
-    'name': req.body.wave.name,
+    'name': w.name,
     'location': {
-      'lng': req.body.wave.location.lng,
-      'lat': req.body.wave.location.lat
+      'lng': w.location.lng,
+      'lat': w.location.lat
     },
-    'buoys': buoys
+    'buoys': w.buoys
   })
+
   wave.save(function(err) {
+    // TODO: better error handling
     if(err) {
       throw err;
     } 
@@ -102,6 +102,7 @@ exports.createWave = function(req, res) {
 
 exports.deleteWave = function(req, res) {
   Wave.findOne({ _id: req.params.id}, function(err, wave){
+    // TODO: better error handling
     if(err) {
       throw err;
     }
