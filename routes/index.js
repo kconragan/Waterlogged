@@ -77,7 +77,9 @@ exports.listWaves = function(req, res) {
 
 exports.createWave = function(req, res) {
   var buoys = [];
-  buoys.push(req.body.wave.closest_buoy);
+  for(i=0; i < req.body.wave.buoys.length; i++) {
+    buoys.push(req.body.wave.buoys[i]);
+  }
   var wave = new Wave({
     'name': req.body.wave.name,
     'location': {

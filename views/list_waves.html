@@ -22,17 +22,19 @@
   </fieldset>
   <fieldset>
     <label>
-      <select name="wave[closest_buoy]">
         {% for buoy in buoys %} 
-          <option value="{{ buoy.id }}">{{ buoy.name }}</option>
+          <div>
+            <input type="checkbox" value="{{ buoy.id }}" name="wave[buoys]" />{{ buoy.name }}
+          </div>
         {% endfor %}
-      </select>
     </label>
   </fieldset>
   <button>Create</button>
   </form>
 </section>
   <h1>waves</h1>
+
+  {% if waves.length %}
   <ul>
     {% for wave in waves %}
     <li>
@@ -44,4 +46,7 @@
     </li>
     {% endfor %}
   </ul>
+  {% else %}
+    <p>You haven't added any waves yet</p>
+  {% endif %}
 {% endblock %}
