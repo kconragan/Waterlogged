@@ -78,6 +78,7 @@ exports.listWaves = function(req, res) {
 exports.createWave = function(req, res) {
   var w = req.body.wave;
 
+  // construct base properties for new Wave
   var wave = new Wave({
     'name': w.name,
     'location': {
@@ -85,7 +86,9 @@ exports.createWave = function(req, res) {
       'lat': w.location.lat
     },
     'buoys': w.buoys
-  })
+  });
+
+  wave.secretSpot = w.secretSpot ? true : false;
 
   wave.save(function(err) {
     // TODO: better error handling
@@ -112,8 +115,9 @@ exports.deleteWave = function(req, res) {
         res.redirect('/waves');
       });
     }
-  })
+  });
 };
+
 
 exports.getWave = function(req, res) {
   Wave.findOne({ _id: req.params.id })
