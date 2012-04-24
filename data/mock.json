@@ -141,7 +141,7 @@ var waves = [
       "lat": 37.08873353618568 
     },
     buoys: [],
-    secret: true
+    secret: false
   },
   {
     "name": "Waddel Creek",
@@ -150,7 +150,7 @@ var waves = [
       "lat": 37.09991000798867 
     },
     buoys: [],
-    secret: true
+    secret: false
   }
 ];
 
@@ -187,10 +187,34 @@ var buoys = [
     "mid": "/m/0dj3tt0",
     "cdipId": "46026",
     "location": {
-      "lng": -122.833333 
+      "lng": -122.833333,
       "lat": 37.758889
     }
-  }
+  },
+  {
+    "name": "Station 46114 - West Monterey Bay, CA" ,
+    "cdipId": "46114",
+    "location": {
+      "lng": -122.342,
+      "lat": 36.710
+    }
+  },
+  {
+    "name": "Station 46042 - 27NM West of Monterey Bay, CA" ,
+    "cdipId": "46042",
+    "location": {
+      "lng": -122.469,
+      "lat": 36.785
+    }
+  },
+  {
+    "name": "Station 46236 - Monterey Canyon Outer, CA" ,
+    "cdipId": "46236",
+    "location": {
+      "lng": -121.947,
+      "lat": 36.761
+    }
+  },
 ];
 
 var surfSessions: [

@@ -44,6 +44,7 @@ exports.deleteBuoy = function(req, res) {
       throw err;
     }
     else {
+      // TODO: find all Waves that reference this buoy and delete accordingly
       buoy.remove(function() {
         res.redirect('/buoys');
       });
@@ -75,13 +76,15 @@ exports.listWaves = function(req, res) {
 };
 
 exports.createWave = function(req, res) {
+  var buoys = [];
+  buoys.push(req.body.wave.closest_buoy);
   var wave = new Wave({
     'name': req.body.wave.name,
     'location': {
       'lng': req.body.wave.location.lng,
       'lat': req.body.wave.location.lat
     },
-    'buoys': req.body.wave.closest_buoy
+    'buoys': buoys
   })
   wave.save(function(err) {
     if(err) {
@@ -93,6 +96,20 @@ exports.createWave = function(req, res) {
       });
     }
   });
+};
+
+exports.deleteWave = function(req, res) {
+  Wave.findOne({ _id: req.params.id}, function(err, wave){
+    if(err) {
+      throw err;
+    }
+    else {
+      // TODO: find all SurfSessions that reference this wave and delete accordingly
+      wave.remove(function() {
+        res.redirect('/waves');
+      });
+    }
+  })
 };
 
 exports.getWave = function(req, res) {

@@ -47,8 +47,9 @@ app.delete ('/buoys/:id', routes.deleteBuoy);
 
 // Waves
 app.get  ('/waves', routes.listWaves);
-app.post ('/waves', routes.createWave);
 app.get  ('/waves/:id', routes.getWave);
+app.post ('/waves', routes.createWave);
+app.delete ('/waves/:id', routes.deleteWave);
 
 // Surf Sessions
 app.get  ('/logs', routes.listLogs);
