@@ -151,34 +151,28 @@ exports.listLogs = function(req, res) {
 exports.createSesh = function(req, res) {
 
   var d = req.body;
+
   var seshDate = req.body.date + ", " + req.body.time;
   seshDate = moment(seshDate, "MM-DD-YYY, HH");
   console.log(seshDate);
 
+  //Create new SurfSession and fill in relevant props
   var sesh = new SurfSession({
     date: seshDate._d,
     location: d.wave,
     duration: d.duration 
   });
 
-  // 1. Look up relevant buoy via the Wave ObjectId
-  Wave.findOne({_id: req.body.wave})
+  // Look up relevant buoy via the Wave ObjectId
+  Wave.findOne({_id: d.wave})
       .populate('buoys', ['ndbcId'])
       .run(function(err, wave) {
-        console.log(wave.buoys);
+        //Fetch relevant buoy data
         h.parseBuoyData(wave.buoys[0].ndbcId, seshDate).then(function(data) {
+         // append to our surf session
          sesh.buoys = data;
          res.send(sesh);
+         // sesh.save();
         }).end()
   });
-  // 2. Fetch relevant buoy data
-  // 3. Create new SurfSession and fill in relevant props
-  // 4. Save & take to new object
-
-  //var sesh = new SurfSession({});
-
-  // this should get the correct buoy readings to be inserted
-  // into the SurfSession.buoys object
-  // fill in sesh.buoys with returned data
-  // sesh.save();
 };
