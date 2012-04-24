@@ -6,8 +6,11 @@ var Buoy= new Schema({
     type: String,
     required: true
   },
+  ndbcId: {
+    type: String,
+    required: true
+  },
   mid: String, 
-  cdipId: String,
   location: {
     lng: Number,
     lat: Number

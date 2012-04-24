@@ -3,6 +3,7 @@ var Wave = require('../models/wave.js');
 var SurfSession = require('../models/surfsession.js');
 
 var h = require('../lib/helpers.js');
+var moment = require('moment');
 var Q = require('q');
 
 
@@ -149,21 +150,35 @@ exports.listLogs = function(req, res) {
 // Construct a SurfSession object and save
 exports.createSesh = function(req, res) {
 
-  // 1. Create new SurfSession and fill in relevant props
-  // 2. Look up relevant buoy via the Wave ObjectId
-  // 3. Fetch relevant buoy data
-  // 4. Attach to SurfSession
-  // 5. Save & take to new object
+  var d = req.body;
+  var seshDate = req.body.date + ", " + req.body.time;
+  seshDate = moment(seshDate, "MM-DD-YYY, HH");
+  console.log(seshDate);
+
+  var sesh = new SurfSession({
+    date: seshDate._d,
+    location: d.wave,
+    duration: d.duration 
+  });
+
+  // 1. Look up relevant buoy via the Wave ObjectId
+  Wave.findOne({_id: req.body.wave})
+      .populate('buoys', ['ndbcId'])
+      .run(function(err, wave) {
+        console.log(wave.buoys);
+        h.parseBuoyData(wave.buoys[0].ndbcId, seshDate).then(function(data) {
+         sesh.buoys = data;
+         res.send(sesh);
+        }).end()
+  });
+  // 2. Fetch relevant buoy data
+  // 3. Create new SurfSession and fill in relevant props
+  // 4. Save & take to new object
 
   //var sesh = new SurfSession({});
 
   // this should get the correct buoy readings to be inserted
   // into the SurfSession.buoys object
-  var buoyId = '46237'; // hardcoded for testing
-  h.parseBuoyData(buoyId).then(function(data) {
-    res.send(data);
-  }).end()
-
   // fill in sesh.buoys with returned data
   // sesh.save();
 };
