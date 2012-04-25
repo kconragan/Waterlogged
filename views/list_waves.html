@@ -19,14 +19,18 @@
       Latitude
       <input type="text" name="wave[location][lat]" />
     </label>
+    <label>
+      Is this a secret spot?
+      <input type="checkbox" name="wave[secretSpot]" value="true" />
+    </label>
   </fieldset>
   <fieldset>
     <label>
+        <select name="wave[buoys]">
         {% for buoy in buoys %} 
-          <div>
-            <input type="checkbox" value="{{ buoy.id }}" name="wave[buoys]" />{{ buoy.name }}
-          </div>
+          <option value="{{ buoy.id }}">{{ buoy.name }}</option>
         {% endfor %}
+        </select>
     </label>
   </fieldset>
   <button>Create</button>

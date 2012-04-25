@@ -15,7 +15,10 @@ var Wave = new Schema({
     type: Schema.ObjectId,
     ref: 'Buoy'
   }],
-  secret: Boolean
+  secretSpot: {
+    type: Boolean,
+    default: false
+  } 
 });
 module.exports = mongoose.model('Wave', Wave);
 

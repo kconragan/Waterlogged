@@ -1,0 +1,7 @@
+{ "name" : "Station 46237 - san francisco bar, ca (142)", "_id" : { "$oid" : "4f95e30bf956934b9d000003" }, "location" : { "lng" : -122.5997078418732, "lat" : 37.78067053149211 }, "ndbcId": "46237" }
+{ "name" : "24NM South Southwest of San Francisco, CA", "_id" : { "$oid" : "4f95e36026a0a66f9f000002" }, "location" : { "lng" : -122.8813934326172, "lat" : 37.63380988687154 }, "ndbcId": "46012" }
+{ "name" : "357NM West of San Francisco, CA", "_id" : { "$oid" : "4f95e39226a0a66f9f000007" }, "location" : { "lng" : -129.0591430664062, "lat" : 38.47455675836861 }, "ndbcId": "46059" }
+{ "name" : "Station 46026 - 18NM West of San Francisco, CA", "_id" : { "$oid" : "4f95e52f26a0a66f9f00000d" }, "location" : { "lng" : -122.833333, "lat" : 37.758889 }, "ndbcId": "46026"}
+{ "name" : "Station 46236 - Monterey Canyon Outer, CA", "_id" : { "$oid" : "4f95fa45d88f72c4a000000f" }, "location" : { "lng" : -121.947, "lat" : 36.761 }, "ndbcId": "46236" }
+{ "name" : "Station 46042 - 27NM West of Monterey Bay, CA", "_id" : { "$oid" : "4f95fa67d88f72c4a0000017" }, "location" : { "lng" : -122.469, "lat" : 36.785 }, "ndbcId": "46042" }
+{ "name" : "Station 46114 - West Monterey Bay, CA", "_id" : { "$oid" : "4f95fa82d88f72c4a0000020" }, "location" : { "lng" : -122.342, "lat" : 36.71 }, "ndbcId": "46114" }

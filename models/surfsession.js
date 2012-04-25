@@ -72,9 +72,10 @@ var SurfSession = new Schema({
     default: 3,
   },
   buoys: {
-    swellHeight: Number,
-    swellPeriod: Number,
-    swellDirection: String,
+    timestamp: Date,
+    wvht: Number, // Significant Swell Height
+    dpd: Number,  // Dominant wave period
+    mwd: String,  // direction from which the waves at (DPD) are coming
   },
 });
 

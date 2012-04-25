@@ -26,7 +26,7 @@ app.configure(function(){
 });
 
 app.configure('development', function(){
-  mongoose.connect('mongodb://localhost/test_the_water');
+  mongoose.connect('mongodb://localhost/toes_are_wet');
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
 });
 
