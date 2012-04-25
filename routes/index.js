@@ -137,7 +137,7 @@ exports.listLogs = function(req, res) {
     Wave.find(function(err, waves) {
       var surfHeight = SurfSession.schema.path('surfHeight').enumValues;
       var surfConditions = SurfSession.schema.path('surfConditions').enumValues;
-      var surfStoke = SurfSession.schema.path('surfStoke').enumValues;
+      var surfStoke = new SurfSession().generateStoke();
       console.log(surfStoke);
       res.render('list_sessions.html', { 
         title: 'Latest Surf Sessions',
@@ -155,18 +155,21 @@ exports.listLogs = function(req, res) {
 exports.createSesh = function(req, res) {
 
   var d = req.body;
+  console.log(d);
 
   var seshDate = d.date + ':' + d.time + ':' + TIMEZONEOFFSET;
-  console.log('time is ', d.time);
   seshDate = moment(seshDate, "MM-DD-YYYY:HH:mm:Z");
-  console.log(seshDate);
 
   //Create new SurfSession and fill in relevant props
   var sesh = new SurfSession({
     date: seshDate._d,
     location: d.wave,
-    duration: d.duration 
+    duration: d.duration,
+    surfHeight: d.surfHeight,
+    surfStoke: d.surfStoke
   });
+
+  sesh.surfConditions = d.surfConditions; // no idea why I have to declare separately
 
   // Look up relevant buoy via the Wave ObjectId
   Wave.findOne({_id: d.wave})

@@ -51,7 +51,7 @@
         Overall, it was
         <select name="surfStoke">
           {% for h in surfStoke %}
-          <option value="{{ h }}">{{ h }}</option>
+          <option value="{{ h.value }}">{{ h.display }}</option>
           {% endfor %}
         </select>
       </label>
