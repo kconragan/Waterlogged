@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Cubism.js</title>
+<style>
+
+@import url(//fonts.googleapis.com/css?family=Yanone+Kaffeesatz:400,700);
+@import url(style.css);
+
+#example1 { min-height: 155px; }
+
+</style>
+<div id="body">
+<h1>WOOOO BUOYS!!!</h1>
+<h3>Wave height (WVHT)</h3>
+<div id="wvht"></div>
+
+<h3>Wave period (DPD)</h3>
+<div id="dpd"></div>
+</div>
+
+<script src="d3.v2.js"></script>
+<script src="cubism.v1.js"></script>
+<script src="highlight.min.js"></script>
+<script src="moment.min.js"></script>
+<script>
+
+
+function BuoyMetric(p, buoyID) {
+  return context.metric(function(start, stop, step, callback) {
+    var m = moment(start).format("YYYY-MM-DDTHH-mm-00") + "Z";
+    var query = 'select * from swdata where date > "' + m +
+               '" and buoy = ' +  buoyID + ' order by date desc';
+
+    var base = "https://api.scraperwiki.com/api/1.0/datastore/sqlite?"; 
+    var params = "format=jsondict&name=selected_buoys&query=" +
+                  encodeURIComponent(query);
+    var url = base + params;
+    console.log("url: ", url);
+    d3.json(url, function(data) {
+      var swell_height = data.map(function(e) {
+        return e[p];  
+      });
+
+      callback(null, swell_height);
+    })
+  }, buoyID)
+}
+
+var context = cubism.context()
+    .serverDelay(0)
+    .clientDelay(0)
+    .step(3.6e6)  // one hour
+    .size(960);
+
+
+function random(name) {
+  var value = 0,
+      values = [],
+      i = 0,
+      last;
+  return context.metric(function(start, stop, step, callback) {
+    start = +start, stop = +stop;
+    if (isNaN(last)) last = start;
+    while (last < stop) {
+      last += step;
+      value = Math.max(-10, Math.min(10, value + .8 * Math.random() - .4 + .2 * Math.cos(i += .2)));
+      values.push(value);
+    }
+    console.log(values);
+    callback(null, values = values.slice((start - stop) / step));
+  }, name);
+}
+
+var buoy_wvht_46237 = BuoyMetric("WVHT", 46237);
+var buoy_wvht_46006 = BuoyMetric("WVHT", 46006);
+var buoy_wvht_46059 = BuoyMetric("WVHT", 46059);
+
+var buoy_dpd_46237 = BuoyMetric("DPD", 46237);
+var buoy_dpd_46006 = BuoyMetric("DPD", 46006);
+var buoy_dpd_46059 = BuoyMetric("DPD", 46059);
+
+var p = random("foo");
+
+d3.select("#wvht").call(function(div) {
+
+  div.append("div")
+      .attr("class", "axis")
+      .call(context.axis().orient("top"));
+
+  div.selectAll(".horizon")
+      .data([buoy_wvht_46237, buoy_wvht_46006, buoy_wvht_46059])
+    .enter().append("div")
+      .attr("class", "horizon")
+      .call(context.horizon().extent([-20, 20]));
+
+  div.append("div")
+      .attr("class", "rule")
+      .call(context.rule());
+
+});
+
+d3.select("#dpd").call(function(div) {
+
+  div.append("div")
+      .attr("class", "axis")
+      .call(context.axis().orient("top"));
+
+  div.selectAll(".horizon")
+      .data([buoy_dpd_46237, buoy_dpd_46006, buoy_dpd_46059])
+    .enter().append("div")
+      .attr("class", "horizon")
+      .call(context.horizon().extent([-20, 20]));
+
+  div.append("div")
+      .attr("class", "rule")
+      .call(context.rule());
+
+});
+
+// On mousemove, reposition the chart values to match the rule.
+context.on("focus", function(i) {
+  d3.selectAll(".value").style("right", i == null ? null : context.size() - i + "px");
+});
+
+</script>
+

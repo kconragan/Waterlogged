@@ -1,0 +1,1 @@
+{"type": "FeatureCollection", "features": [{"geometry": {"type": "Point", "coordinates": ["12", "-23"]}, "type": "Feature", "properties": {"status": "E", "name": "NE Extension", "owner": "Prediction and Research Moored Array in the Atlantic", "buoytype": "buoy", "data": "y", "id": "13001"}, "id": null}]}
