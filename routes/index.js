@@ -6,6 +6,7 @@ var h = require('../lib/helpers.js');
 var moment = require('moment');
 var Q = require('q');
 
+var TIMEZONEOFFSET = '-8';
 
 exports.index = function(req, res){
   res.render('index.html', { title: 'Waterlogged' })
@@ -117,11 +118,7 @@ exports.deleteWave = function(req, res) {
       });
     }
   });
-};
-
-
-exports.getWave = function(req, res) {
-  Wave.findOne({ _id: req.params.id })
+}; exports.getWave = function(req, res) { Wave.findOne({ _id: req.params.id })
       .populate('buoys')
       .run(function(err, wave) {
         if(err) {
@@ -138,10 +135,17 @@ exports.getWave = function(req, res) {
 exports.listLogs = function(req, res) {
   SurfSession.find(function(err, log){
     Wave.find(function(err, waves) {
+      var surfHeight = SurfSession.schema.path('surfHeight').enumValues;
+      var surfConditions = SurfSession.schema.path('surfConditions').enumValues;
+      var surfStoke = SurfSession.schema.path('surfStoke').enumValues;
+      console.log(surfStoke);
       res.render('list_sessions.html', { 
         title: 'Latest Surf Sessions',
         log: log,
         waves: waves,
+        surfHeight: surfHeight,
+        surfConditions: surfConditions,
+        surfStoke: surfStoke
       });
     });
   });
@@ -152,8 +156,9 @@ exports.createSesh = function(req, res) {
 
   var d = req.body;
 
-  var seshDate = req.body.date + ", " + req.body.time;
-  seshDate = moment(seshDate, "MM-DD-YYY, HH");
+  var seshDate = d.date + ':' + d.time + ':' + TIMEZONEOFFSET;
+  console.log('time is ', d.time);
+  seshDate = moment(seshDate, "MM-DD-YYYY:HH:mm:Z");
   console.log(seshDate);
 
   //Create new SurfSession and fill in relevant props

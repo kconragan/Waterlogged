@@ -6,6 +6,14 @@
   <h1>Log a new session</h1>
   <form action="" method="post">
     <fieldset>
+      <h2>Where</h2>
+      <select name="wave">
+        {% for w in waves %}
+        <option value="{{w.id}}">{{ w.name }}</option>
+        {% endfor %}
+      </select>
+    </fieldset>
+    <fieldset>
       <h2>When</h2>
       <label>
         Date
@@ -22,12 +30,31 @@
       </label>
     </fieldset>
     <fieldset>
-      <h2>Where</h2>
-      <select name="wave">
-        {% for w in waves %}
-        <option value="{{w.id}}">{{ w.name }}</option>
-        {% endfor %}
-      </select>
+      <h2>How was it?</h2>
+      <label>
+        Surf was
+        <select name="surfHeight">
+          {% for h in surfHeight %}
+          <option value="{{ h }}">{{ h }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label>
+        Conditions were
+        <select name="surfConditions">
+          {% for h in surfConditions %}
+          <option value="{{ h }}">{{ h }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <label>
+        Overall, it was
+        <select name="surfStoke">
+          {% for h in surfStoke %}
+          <option value="{{ h }}">{{ h }}</option>
+          {% endfor %}
+        </select>
+      </label>
     </fieldset>
     <button>Create</button>
   </form>

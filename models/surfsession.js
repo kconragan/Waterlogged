@@ -28,28 +28,7 @@ var surfConditions = [
 ];
 
 // Stoke options
-var surfStoke = [
-  {
-    value: 1,
-    display: 'Worst session of the year',
-  },
-  {
-    value: 2,
-    display: 'Not worth the paddle',
-  },
-  {
-    value: 3,
-    display: 'Maintenance session',
-  },
-  {
-    value: 4,
-    display: 'Stoked',
-  },
-  {
-    value: 4,
-    display: 'Epic',
-  },
-];
+var surfStoke = ['1', '2', '3', '4', '5'];
 
 var SurfSession = new Schema({
   date: Date,
@@ -67,7 +46,7 @@ var SurfSession = new Schema({
     default: 'Fair',
   },
   surfStoke: {
-    type: Number,
+    type: String,
     enum: surfStoke,
     default: 3,
   },
@@ -78,5 +57,31 @@ var SurfSession = new Schema({
     mwd: String,  // direction from which the waves at (DPD) are coming
   },
 });
+
+SurfSession.methods.generateStoke = function() {
+  // return a map of surfStoke values to display values
+  return [
+    {
+      "value": 1,
+      "display": "Worst session of the year"
+    }, 
+    {
+      "value": 2,
+      "display": "Not worth the paddle"
+    }, 
+    {
+      "value": 3,
+      "display": "Maintenance session"
+    }, 
+    {
+      "value": 4,
+      "display": "Stoke"
+    }, 
+    {
+      "value": 5,
+      "display": "Epic"
+    }
+  ];
+}
 
 module.exports = mongoose.model('SurfSession', SurfSession);
