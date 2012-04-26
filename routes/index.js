@@ -192,7 +192,7 @@ exports.createSesh = function(req, res) {
        // fetch tide/winds from wunderground
       .then(function() {
         h.parseTideAndWind(sesh.date, waveLocation).then(function(data) {
-          console.log(data.wind); // we have wind
+          console.log(data); // we have wind
           res.send(sesh);
         });
       }).end()
