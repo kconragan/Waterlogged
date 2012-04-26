@@ -169,18 +169,32 @@ exports.createSesh = function(req, res) {
     surfStoke: d.surfStoke
   });
 
+  var waveLocation = {};
+
   sesh.surfConditions = d.surfConditions; // no idea why I have to declare separately
 
   // Look up relevant buoy via the Wave ObjectId
   Wave.findOne({_id: d.wave})
       .populate('buoys', ['ndbcId'])
       .run(function(err, wave) {
+        
+        // fill in wave location for later reference
+        waveLocation.lng = wave.location.lng;
+        waveLocation.lat = wave.location.lat;
+
         //Fetch relevant buoy data
         h.parseBuoyData(wave.buoys[0].ndbcId, seshDate).then(function(data) {
          // append to our surf session
          sesh.buoys = data;
-         res.send(sesh);
+
          // sesh.save();
-        }).end()
+        })
+       // fetch tide/winds from wunderground
+      .then(function() {
+        h.parseTideAndWind(sesh.date, waveLocation).then(function(data) {
+          console.log(data.wind); // we have wind
+          res.send(sesh);
+        });
+      }).end()
   });
 };
