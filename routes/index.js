@@ -9,7 +9,7 @@ var Q = require('q');
 var TIMEZONEOFFSET = '-8';
 
 exports.index = function(req, res){
-  res.render('index.html', { title: 'Waterlogged' })
+  res.render('index.html', { title: 'Waterlogged' });
 };
 
 exports.listBuoys = function(req, res) {
@@ -34,7 +34,7 @@ exports.createBuoy = function(req, res) {
       } 
       else {
         Buoy.findOne({_id: buoy.id }, function(err, buoy) {
-          res.redirect('/buoys/' + buoy._id.toHexString())
+          res.redirect('/buoys/' + buoy._id.toHexString());
         });
       }
     });
@@ -51,7 +51,7 @@ exports.deleteBuoy = function(req, res) {
         res.redirect('/buoys');
       });
     }
-  })
+  });
 };
 
 exports.getBuoy = function(req, res) {
@@ -62,7 +62,7 @@ exports.getBuoy = function(req, res) {
     else {
       res.render('buoy.html', { buoy: buoy});
     }
-  })
+  });
 };
 
 exports.listWaves = function(req, res) {
@@ -99,7 +99,7 @@ exports.createWave = function(req, res) {
     } 
     else {
       Wave.findOne({ _id: wave.id }, function(err, wave) {
-        res.redirect('/waves/' + wave._id.toHexString())
+        res.redirect('/waves/' + wave._id.toHexString());
       });
     }
   });
@@ -127,7 +127,7 @@ exports.deleteWave = function(req, res) {
         else {
           res.render('wave.html', {
             wave: wave
-          })
+          });
         }
   });
 };
@@ -192,9 +192,10 @@ exports.createSesh = function(req, res) {
        // fetch tide/winds from wunderground
       .then(function() {
         h.parseTideAndWind(sesh.date, waveLocation).then(function(data) {
-          console.log(data); // we have wind
+          sesh.wind = data.wind;
+          sesh.tide = data.tide;
           res.send(sesh);
         });
-      }).end()
+      }).end();
   });
 };

@@ -27,6 +27,8 @@ var surfConditions = [
   'Good+'
 ];
 
+var tideDirection = [ 'incoming', 'outgoing'];
+
 // Stoke options
 var surfStoke = ['1', '2', '3', '4', '5'];
 
@@ -56,6 +58,17 @@ var SurfSession = new Schema({
     dpd: Number,  // Dominant wave period
     mwd: String,  // direction from which the waves at (DPD) are coming
   },
+  wind: {
+    speed: Number,
+    direction: String
+  },
+  tide: {
+    height: Number,
+    direction: {
+      type: String,
+      enum: tideDirection
+    }
+  }
 });
 
 SurfSession.methods.generateStoke = function() {
