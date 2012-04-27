@@ -43,20 +43,17 @@ var SurfSession = new Schema({
   // Subjective recording of surf height
   surfHeight: {
     type: String,
-    enum: surfHeights,
-    default: 'CH'
+    enum: surfHeights
   },
   // Relative measurment of conditions by tide, wind, swell, etc.
   surfConditions: {
     type: String,
-    enum: surfConditions,
-    default: 'Fair'
+    enum: surfConditions
   },
   // Likert scale for how much fun was, independent of conditions
   surfStoke: {
     type: String,
-    enum: surfStoke,
-    default: 3
+    enum: surfStoke
   },
   // Objective readings of NOAA buoys
   buoys: {

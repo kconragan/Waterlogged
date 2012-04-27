@@ -226,7 +226,9 @@ exports.getLog = function(req, res) {
       else {
         console.log(sesh);
         sesh.buoys.wvht = h.convertMetersToFeet(sesh.buoys.wvht, 1);
-        sesh.tide.height = sesh.tide.height.toFixed(2);
+        if (sesh.tide.height) {
+          sesh.tide.height = sesh.tide.height.toFixed(2);
+        };
         res.render('sesh.html', { sesh: sesh });
       }
     });
