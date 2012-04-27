@@ -10,7 +10,12 @@
  <h2>{{ sesh.surfHeight }}</h2>
  <h2>{{ sesh.surfConditions }}</h2>
  <h2>{{ sesh.surfStoke }}</h2>
- <h2>{{ sesh.buoys.mwd }} {{ sesh.buoys.wvht }} @ {{ sesh.buoys.dpd }} seconds</h2>
- <h2>{{ sesh.tide.height }} {{ sesh.tide.direction }}</h2>
+ <h2>{{ sesh.buoys.mwd }} {{ sesh.buoys.wvht }} feet @ {{ sesh.buoys.dpd }} seconds</h2>
+ <h2>{{ sesh.tide.height }} and {{ sesh.tide.direction }}</h2>
  <h2>{{ sesh.wind.speed }} {{ sesh.wind.direction }}</h2>
+
+ <form action="/logs/{{ sesh.id }}" method="post">
+  <input type="hidden" value="DELETE" name="_method" />
+  <button class="btn delete">delete</button>
+ </form>
 {% endblock %}

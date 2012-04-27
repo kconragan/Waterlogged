@@ -6,7 +6,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var routes  = require('./routes');
-var jinjs   = require('jinjs'); 
+var jinjs   = require('jinjs');
 
 var app = module.exports = express.createServer();
 
@@ -17,7 +17,7 @@ app.configure(function(){
   app.set('view engine', 'jinjs');
   app.register('.html', require('jinjs'));
   app.register('view options', {
-    'layout': false 
+    'layout': false
   });
   app.use(express.bodyParser());
   app.use(express.methodOverride());
@@ -27,12 +27,12 @@ app.configure(function(){
 
 app.configure('development', function(){
   mongoose.connect('mongodb://localhost/toes_are_wet');
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
+  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
 app.configure('production', function(){
   mongoose.connect('mongodb://localhost/test_the_water');
-  app.use(express.errorHandler()); 
+  app.use(express.errorHandler());
 });
 
 // Routes
@@ -55,6 +55,7 @@ app.delete ('/waves/:id', routes.deleteWave);
 app.get  ('/logs', routes.listLogs);
 app.post ('/logs', routes.createSesh);
 app.get  ('/logs/:id', routes.getLog);
+app.delete ('/logs/:id', routes.deleteLog);
 
 app.listen(3000);
 console.log("Express server listening on port %d in %s mode",

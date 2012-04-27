@@ -29,9 +29,9 @@ exports.createBuoy = function(req, res) {
 
     buoy.save(function(err) {
       if(err) {
-        // do error handling 
+        // do error handling
         throw err;
-      } 
+      }
       else {
         Buoy.findOne({_id: buoy.id }, function(err, buoy) {
           res.redirect('/buoys/' + buoy._id.toHexString());
@@ -58,7 +58,7 @@ exports.getBuoy = function(req, res) {
   Buoy.findOne({ _id: req.params.id}, function(err, buoy) {
     if(err) {
       throw err;
-    } 
+    }
     else {
       res.render('buoy.html', { buoy: buoy});
     }
@@ -68,7 +68,7 @@ exports.getBuoy = function(req, res) {
 exports.listWaves = function(req, res) {
   Wave.find(function(err, waves){
     Buoy.find(function(err, buoys) {
-      res.render('list_waves.html', { 
+      res.render('list_waves.html', {
         title: 'Waves',
         waves: waves,
         buoys: buoys
@@ -96,7 +96,7 @@ exports.createWave = function(req, res) {
     // TODO: better error handling
     if(err) {
       throw err;
-    } 
+    }
     else {
       Wave.findOne({ _id: wave.id }, function(err, wave) {
         res.redirect('/waves/' + wave._id.toHexString());
@@ -126,7 +126,7 @@ exports.getWave = function(req, res) {
       .run(function(err, wave) {
         if(err) {
           throw err;
-        } 
+        }
         else {
           res.render('wave.html', {
             wave: wave
@@ -142,7 +142,7 @@ exports.listLogs = function(req, res) {
       var surfConditions = SurfSession.schema.path('surfConditions').enumValues;
       var surfStoke = new SurfSession().generateStoke();
       console.log(surfStoke);
-      res.render('list_sessions.html', { 
+      res.render('list_sessions.html', {
         title: 'Latest Surf Sessions',
         log: log,
         waves: waves,
@@ -180,7 +180,7 @@ exports.createSesh = function(req, res) {
   Wave.findOne({_id: d.wave})
       .populate('buoys', ['ndbcId'])
       .run(function(err, wave) {
-        
+
         // fill in wave location for later reference
         waveLocation.lng = wave.location.lng;
         waveLocation.lat = wave.location.lat;
@@ -225,7 +225,24 @@ exports.getLog = function(req, res) {
       }
       else {
         console.log(sesh);
+        sesh.buoys.wvht = h.convertMetersToFeet(sesh.buoys.wvht, 1);
+        sesh.tide.height = sesh.tide.height.toFixed(2);
         res.render('sesh.html', { sesh: sesh });
       }
     });
+};
+
+exports.deleteLog = function(req, res) {
+  SurfSession.findOne({ _id: req.params.id}, function(err, sesh){
+    // TODO: better error handling
+    if(err) {
+      throw err;
+    }
+    else {
+      // TODO: find all SurfSessions that reference this wave and delete accordingly
+      sesh.remove(function() {
+        res.redirect('/logs');
+      });
+    }
+  });
 };
