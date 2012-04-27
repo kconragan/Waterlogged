@@ -59,4 +59,7 @@
     <button>Create</button>
   </form>
 </section>
+{% for sesh in log %}
+  <a href="/logs/{{ sesh.id }}">{{ sesh.date }}</a>
+{% endfor %}
 {% endblock %}

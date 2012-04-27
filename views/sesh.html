@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block title %} {{sesh.name}} {% endblock %}
+
+{% block body %}
+ <h1>
+   {{ sesh.date }} at {{ sesh.location.name }}
+ </h1>
+
+ <h2>{{ sesh.surfHeight }}</h2>
+ <h2>{{ sesh.surfConditions }}</h2>
+ <h2>{{ sesh.surfStoke }}</h2>
+ <h2>{{ sesh.buoys.mwd }} {{ sesh.buoys.wvht }} @ {{ sesh.buoys.dpd }} seconds</h2>
+ <h2>{{ sesh.tide.height }} {{ sesh.tide.direction }}</h2>
+ <h2>{{ sesh.wind.speed }} {{ sesh.wind.direction }}</h2>
+{% endblock %}

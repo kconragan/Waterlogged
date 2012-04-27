@@ -118,7 +118,10 @@ exports.deleteWave = function(req, res) {
       });
     }
   });
-}; exports.getWave = function(req, res) { Wave.findOne({ _id: req.params.id })
+};
+
+exports.getWave = function(req, res) {
+  Wave.findOne({ _id: req.params.id })
       .populate('buoys')
       .run(function(err, wave) {
         if(err) {
@@ -194,8 +197,35 @@ exports.createSesh = function(req, res) {
         h.parseTideAndWind(sesh.date, waveLocation).then(function(data) {
           sesh.wind = data.wind;
           sesh.tide = data.tide;
-          res.send(sesh);
+          console.log(sesh);
+          // Save new session and redirect
+          sesh.save(function(err) {
+            // TODO: better error handling
+            if(err) {
+              throw err;
+            }
+            else {
+              SurfSession.findOne({ _id: sesh.id }, function(err, sesh) {
+                res.redirect('/logs/' + sesh._id.toHexString());
+              });
+            }
+          });
         });
       }).end();
   });
+};
+
+exports.getLog = function(req, res) {
+  SurfSession
+    .findOne({ _id: req.params.id})
+    .populate('location')
+    .run(function(err, sesh) {
+      if(err) {
+        throw err;
+      }
+      else {
+        console.log(sesh);
+        res.render('sesh.html', { sesh: sesh });
+      }
+    });
 };

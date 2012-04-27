@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var Wave = require('./wave.js');
+var Schema   = mongoose.Schema;
+var Wave     = require('./wave.js');
 
 // Surf height options
 var surfHeights = [
@@ -27,36 +27,43 @@ var surfConditions = [
   'Good+'
 ];
 
-var tideDirection = [ 'incoming', 'outgoing'];
+var tideDirection = ['incoming', 'outgoing'];
 
 // Stoke options
 var surfStoke = ['1', '2', '3', '4', '5'];
 
 var SurfSession = new Schema({
   date: Date,
-  duration: Number,
-  location: Schema.ObjectId,
+  duration: Number, // In minutes
+  location: {
+    type: Schema.ObjectId,
+    ref: 'Wave'
+  },
   notes: String,
+  // Subjective recording of surf height
   surfHeight: {
     type: String,
     enum: surfHeights,
-    default: 'CH',
+    default: 'CH'
   },
+  // Relative measurment of conditions by tide, wind, swell, etc.
   surfConditions: {
     type: String,
     enum: surfConditions,
-    default: 'Fair',
+    default: 'Fair'
   },
+  // Likert scale for how much fun was, independent of conditions
   surfStoke: {
     type: String,
     enum: surfStoke,
-    default: 3,
+    default: 3
   },
+  // Objective readings of NOAA buoys
   buoys: {
     timestamp: Date,
-    wvht: Number, // Significant Swell Height
-    dpd: Number,  // Dominant wave period
-    mwd: String,  // direction from which the waves at (DPD) are coming
+    wvht: Number, // Significant Swell Height in meters
+    dpd: Number,  // Dominant wave period in seconds
+    mwd: String  // direction from which the waves at (DPD) are coming
   },
   wind: {
     speed: Number,
@@ -77,24 +84,28 @@ SurfSession.methods.generateStoke = function() {
     {
       "value": 1,
       "display": "Worst session of the year"
-    }, 
+    },
     {
       "value": 2,
       "display": "Not worth the paddle"
-    }, 
+    },
     {
       "value": 3,
       "display": "Maintenance session"
-    }, 
+    },
     {
       "value": 4,
       "display": "Stoke"
-    }, 
+    },
     {
       "value": 5,
       "display": "Epic"
     }
   ];
+};
+
+function displaySurfHeight(ht) {
+  // transform enumerated abbreviation into human friendly string
 }
 
 module.exports = mongoose.model('SurfSession', SurfSession);
