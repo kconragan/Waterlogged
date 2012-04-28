@@ -42,6 +42,7 @@ app.get('/', routes.index);
 // Buoys
 app.get    ('/buoys', routes.listBuoys);
 app.get    ('/buoys/:id', routes.getBuoy);
+app.get    ('/buoys/:id/:year/:month/:day/:time', routes.getBuoyReading);
 app.post   ('/buoys', routes.createBuoy);
 app.delete ('/buoys/:id', routes.deleteBuoy);
 

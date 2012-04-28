@@ -65,6 +65,26 @@ exports.getBuoy = function(req, res) {
   });
 };
 
+exports.getBuoyReading = function(req, res) {
+  var ndbcId = req.params.id.toString();
+  var year = req.params.year;
+  var month = req.params.month;
+  var day = req.params.day;
+  var hour = req.params.time;
+  var buoyTime = moment(year + '-' + month + '-' + day + '-' + hour);
+  console.log(buoyTime);
+  console.log(ndbcId);
+  h.parseBuoyData(ndbcId, buoyTime).then(function(data) {
+    res.send(data);
+  });
+  // Buoy.findOne({ ndbcId: ndbcId }, function(err, buoy) {
+  //   if(err) {
+  //     throw err;
+  //   }
+  //   res.send(buoy);
+  // });
+};
+
 exports.listWaves = function(req, res) {
   Wave.find(function(err, waves){
     Buoy.find(function(err, buoys) {
