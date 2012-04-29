@@ -53,9 +53,10 @@ app.post ('/waves', routes.createWave);
 app.delete ('/waves/:id', routes.deleteWave);
 
 // Surf Sessions
-app.get  ('/logs', routes.listLogs);
-app.post ('/logs', routes.createSesh);
-app.get  ('/logs/:id', routes.getLog);
+app.get    ('/logs', routes.listLogs);
+app.post   ('/logs', routes.createSesh);
+app.get    ('/logs/:id', routes.getLog);
+app.post   ('/logs/:id/update', routes.updateSeshData);
 app.delete ('/logs/:id', routes.deleteLog);
 
 app.listen(3000);

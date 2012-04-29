@@ -66,23 +66,15 @@ exports.getBuoy = function(req, res) {
 };
 
 exports.getBuoyReading = function(req, res) {
-  var ndbcId = req.params.id.toString();
-  var year = req.params.year;
-  var month = req.params.month;
-  var day = req.params.day;
-  var hour = req.params.time;
+  var ndbcId   = req.params.id.toString();
+  var year     = req.params.year;
+  var month    = req.params.month;
+  var day      = req.params.day;
+  var hour     = req.params.time;
   var buoyTime = moment(year + '-' + month + '-' + day + '-' + hour);
-  console.log(buoyTime);
-  console.log(ndbcId);
   h.parseBuoyData(ndbcId, buoyTime).then(function(data) {
     res.send(data);
   });
-  // Buoy.findOne({ ndbcId: ndbcId }, function(err, buoy) {
-  //   if(err) {
-  //     throw err;
-  //   }
-  //   res.send(buoy);
-  // });
 };
 
 exports.listWaves = function(req, res) {
@@ -180,8 +172,9 @@ exports.createSesh = function(req, res) {
   var d = req.body;
   console.log(d);
 
-  var seshDate = d.date + ':' + d.time + ':' + TIMEZONEOFFSET;
-  seshDate = moment(seshDate, "MM-DD-YYYY:HH:mm:Z");
+  var seshDate = d.date + ':' + d.time;
+  seshDate = moment(seshDate, "MM-DD-YYYY:HH:mm");
+  console.log(seshDate);
 
   //Create new SurfSession and fill in relevant props
   var sesh = new SurfSession({
@@ -206,6 +199,8 @@ exports.createSesh = function(req, res) {
         waveLocation.lat = wave.location.lat;
 
         //Fetch relevant buoy data
+        console.log('the session date is ', seshDate);
+        console.log('the wave data is ', wave);
         h.parseBuoyData(wave.buoys[0].ndbcId, seshDate).then(function(data) {
          // append to our surf session
          sesh.buoys = data;
@@ -215,8 +210,12 @@ exports.createSesh = function(req, res) {
        // fetch tide/winds from wunderground
       .then(function() {
         h.parseTideAndWind(sesh.date, waveLocation).then(function(data) {
-          sesh.wind = data.wind;
-          sesh.tide = data.tide;
+          if(data.wind) {
+            sesh.wind = data.wind;
+          }
+          if(data.tide && data.tide.direction !== null) {
+            sesh.tide = data.tide;
+          }
           console.log(sesh);
           // Save new session and redirect
           sesh.save(function(err) {
@@ -246,12 +245,50 @@ exports.getLog = function(req, res) {
       else {
         console.log(sesh);
         sesh.buoys.wvht = h.convertMetersToFeet(sesh.buoys.wvht, 1);
+         var seshDate = moment(new Date(sesh.date)).format('h:mm a dddd, MMMM Do, YYYY z');
+         sesh.friendlyDate = seshDate;
+         console.log(sesh.friendlyDate);
         if (sesh.tide.height) {
           sesh.tide.height = sesh.tide.height.toFixed(2);
-        };
+        }
         res.render('sesh.html', { sesh: sesh });
       }
     });
+};
+
+exports.updateSeshData = function(req, res) {
+  SurfSession
+    .findOne({ _id: req.params.id})
+    .populate('location')
+    .run(function(err, sesh) {
+      if(err) {
+        throw err;
+      }
+      else {
+        var surfSession = sesh;
+        var buoyId = surfSession.location.buoys;
+        Buoy.findOne({ _id: buoyId }).run(function(err, buoy) {
+          var ndbcId   = buoy.ndbcId;
+          var seshTime = moment(surfSession.date);
+          var year     = seshTime.year();
+          var month    = seshTime.month();
+          var day      = seshTime.date();
+          var hour     = seshTime.hours() + ':' + seshTime.minutes();
+          var buoyTime = moment(new Date(surfSession.date));
+
+          h.parseBuoyData(ndbcId, buoyTime).then(function(data) {
+            console.log(req.body.ajax);
+            if(req.body.ajax === 'true') {
+              console.log('ajax response');
+              res.send(data);
+            }
+            else {
+              console.log('non-ajax response');
+            }
+          });
+        });
+      }
+  });
 };
 
 exports.deleteLog = function(req, res) {

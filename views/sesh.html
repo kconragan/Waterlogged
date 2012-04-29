@@ -4,7 +4,7 @@
 
 {% block body %}
  <h1>
-   {{ sesh.date }} at {{ sesh.location.name }}
+   <time>{{ sesh.friendlyDate }}</time> at {{ sesh.location.name }}
  </h1>
 
  <h2>{{ sesh.surfHeight }}</h2>
@@ -14,8 +14,32 @@
  <h2>{{ sesh.tide.height }} and {{ sesh.tide.direction }}</h2>
  <h2>{{ sesh.wind.speed }} {{ sesh.wind.direction }}</h2>
 
+ <a id="fetchbuoy-trigger" href="/buoys/46237/2012/04/15/09:37">Fetch buoy data</a>
+<form action="/logs/{{ sesh.id }}/update" method="post" id="update-buoys">
+	<input type="hidden" value="false" name="ajax" />
+  <button id="update-buoys-trigger" class="btn update">Fetch buoy data</button>
+</form>
+
  <form action="/logs/{{ sesh.id }}" method="post">
   <input type="hidden" value="DELETE" name="_method" />
   <button class="btn delete">delete</button>
  </form>
+{% endblock %}
+
+{% block scripts %}
+ <script>
+   $(document).ready(function(){
+   	$("#update-buoys-trigger").click(function() {
+   		var $form = $(this).parent('form');
+   		$('input[name=ajax]').attr('value', true);
+   		var action = $form.attr('action');
+   		console.log(action);
+   		$.post(action, $form.serialize(), function(data) {
+   			console.log(data);
+   			return false;
+   		});
+   		return false;
+   	});
+   });
+ </script>
 {% endblock %}

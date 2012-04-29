@@ -8,9 +8,13 @@ var Buoy= new Schema({
   },
   ndbcId: {
     type: String,
+    required: true,
+    unique: true
+  },
+  mid: {
+    type: String,
     required: true
   },
-  mid: String, 
   location: {
     lng: Number,
     lat: Number
