@@ -11,8 +11,9 @@
  <h2>{{ sesh.surfConditions }}</h2>
  <h2>{{ sesh.surfStoke }}</h2>
  <h2>{{ sesh.buoys.mwd }} {{ sesh.buoys.wvht }} feet @ {{ sesh.buoys.dpd }} seconds</h2>
- <h2>{{ sesh.tide.height }} and {{ sesh.tide.direction }}</h2>
  <h2>{{ sesh.wind.speed }} {{ sesh.wind.direction }}</h2>
+ <h2>{{ sesh.weather.temperature }} {{ sesh.weather.conditions }}</h2>
+ {{ sesh.notes }}
 
  <a id="fetchbuoy-trigger" href="/buoys/46237/2012/04/15/09:37">Fetch buoy data</a>
 <form action="/logs/{{ sesh.id }}/update" method="post" id="update-buoys">
@@ -24,6 +25,7 @@
   <input type="hidden" value="DELETE" name="_method" />
   <button class="btn delete">delete</button>
  </form>
+
 {% endblock %}
 
 {% block scripts %}

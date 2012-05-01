@@ -182,12 +182,14 @@ exports.createSesh = function(req, res) {
     location: d.wave,
     duration: d.duration,
     surfHeight: d.surfHeight,
-    surfStoke: d.surfStoke
+    surfStoke: d.surfStoke,
+    notes: d.notes
   });
 
   var waveLocation = {};
 
   sesh.surfConditions = d.surfConditions; // no idea why I have to declare separately
+  console.log(sesh);
 
   // Look up relevant buoy via the Wave ObjectId
   Wave.findOne({_id: d.wave})
@@ -213,10 +215,10 @@ exports.createSesh = function(req, res) {
           if(data.wind) {
             sesh.wind = data.wind;
           }
-          if(data.tide && data.tide.direction !== null) {
-            sesh.tide = data.tide;
+          if(data.weather) {
+            sesh.weather = data.weather;
           }
-          console.log(sesh);
+          console.log('the session before saving is ', sesh);
           // Save new session and redirect
           sesh.save(function(err) {
             // TODO: better error handling
@@ -243,11 +245,9 @@ exports.getLog = function(req, res) {
         throw err;
       }
       else {
-        console.log(sesh);
         sesh.buoys.wvht = h.convertMetersToFeet(sesh.buoys.wvht, 1);
          var seshDate = moment(new Date(sesh.date)).format('h:mm a dddd, MMMM Do, YYYY z');
          sesh.friendlyDate = seshDate;
-         console.log(sesh.friendlyDate);
         if (sesh.tide.height) {
           sesh.tide.height = sesh.tide.height.toFixed(2);
         }

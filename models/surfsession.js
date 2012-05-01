@@ -55,21 +55,25 @@ var SurfSession = new Schema({
     type: String,
     enum: surfStoke
   },
-  // Objective readings of NOAA buoys
   buoys: {
     timestamp: Date,
-    wvht: Number, // Significant Swell Height in meters
-    dpd: Number,  // Dominant wave period in seconds
-    mwd: String  // direction from which the waves at (DPD) are coming
+    wvht: Number,        // Significant Swell Height in meters
+    dpd: Number,         // Dominant wave period in seconds
+    mwd: String          // Direction from which the waves (DPD) are coming
   },
   wind: {
-    speed: Number,
-    direction: String
+    speed: Number,       // The wind speed in MPH
+    direction: String,   // Text label for wind direction (eg 'ESE', 'South')
+    degrees: Number      // The degrees out of 360 (eg '284')
+  },
+  weather: {
+    temperature: Number, // The temperature in farenheit
+    conditions: String   // Subjective label (etc. 'clear', 'foggy')
   },
   tide: {
-    height: Number,
+    height: Number,      // Tide measurement in feet
     direction: {
-      type: String,
+      type: String,      // Is the tide incoming or outgoing?
       enum: tideDirection
     }
   }
