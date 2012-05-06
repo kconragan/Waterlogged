@@ -34,6 +34,7 @@
       <label>
         Surf was
         <select name="surfHeight">
+          <option value="">--</option>
           {% for h in surfHeight %}
           <option value="{{ h }}">{{ h }}</option>
           {% endfor %}
@@ -42,6 +43,7 @@
       <label>
         Conditions were
         <select name="surfConditions">
+          <option value="">--</option>
           {% for h in surfConditions %}
           <option value="{{ h }}">{{ h }}</option>
           {% endfor %}
@@ -50,6 +52,7 @@
       <label>
         Overall, it was
         <select name="surfStoke">
+          <option value="">--</option>
           {% for h in surfStoke %}
           <option value="{{ h.value }}">{{ h.display }}</option>
           {% endfor %}
@@ -65,7 +68,11 @@
     <button>Create</button>
   </form>
 </section>
+{% if log %}
+<ul>
 {% for sesh in log %}
-  <a href="/logs/{{ sesh.id }}">{{ sesh.date }}</a>
+  <li><a href="/logs/{{ sesh.id }}">{{ sesh.date }}</a></li>
 {% endfor %}
+</ul>
+{% endif %}
 {% endblock %}

@@ -174,21 +174,32 @@ exports.createSesh = function(req, res) {
 
   var seshDate = d.date + ':' + d.time;
   seshDate = moment(seshDate, "MM-DD-YYYY:HH:mm");
-  console.log(seshDate);
+  console.log('the surf session occurred in the following timezone ', seshDate.zone());
 
   //Create new SurfSession and fill in relevant props
   var sesh = new SurfSession({
     date: seshDate._d,
-    location: d.wave,
-    duration: d.duration,
-    surfHeight: d.surfHeight,
-    surfStoke: d.surfStoke,
-    notes: d.notes
+    location: d.wave
   });
+
+  if(d.duration) {
+    sesh.duration = d.duration;
+  }
+  if(d.surfHeight) {
+    sesh.surfHeight = d.surfHeight;
+  }
+  if(d.surfConditions) {
+    sesh.surfConditions = d.surfConditions;
+  }
+  if(d.surfStoke) {
+    sesh.surfStoke = d.surfStoke;
+  }
+  if(d.notes) {
+    sesh.notes = d.notes;
+  }
 
   var waveLocation = {};
 
-  sesh.surfConditions = d.surfConditions; // no idea why I have to declare separately
   console.log(sesh);
 
   // Look up relevant buoy via the Wave ObjectId
@@ -200,14 +211,12 @@ exports.createSesh = function(req, res) {
         waveLocation.lng = wave.location.lng;
         waveLocation.lat = wave.location.lat;
 
-        //Fetch relevant buoy data
-        console.log('the session date is ', seshDate);
-        console.log('the wave data is ', wave);
+        //Fetch relevant buoy data and append to surf session
         h.parseBuoyData(wave.buoys[0].ndbcId, seshDate).then(function(data) {
-         // append to our surf session
-         sesh.buoys = data;
-
-         // sesh.save();
+          console.log('buoy data is ', data);
+          if(data) {
+           sesh.buoys = data;
+          }
         })
        // fetch tide/winds from wunderground
       .then(function() {
