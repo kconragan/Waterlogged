@@ -51,9 +51,30 @@ describe('Helper functions', function() {
     });
   });
   describe('parseBuoyData function', function() {
-    it('takes a timestamp and buoy and finds closest reading', function() {
-        var epicSurfDate = moment('22 January 2011 13:30:00');
-        expect(2+2).to.equal(4);
+    it('compare timestamp to array of buoy readings to find closest',
+      function() {
+        var epicSurfDate = moment('22 January 2011 13:30:00'); // PST
+        var fDate = moment(Date.UTC.apply({}, ['2011', '01', '22', '04', '05']));
+        var fDate2 = moment(Date.UTC.apply({}, ['2011', '01', '23', '04', '05']));
+        var fDate3 = moment(Date.UTC.apply({}, ['2011', '01', '24', '04', '05']));
+        var fakeReadings = [
+          {
+            timestamp: fDate,
+            wvht: 4.10
+          },
+          {
+            timestamp: fDate2,
+            wvht: 1.10
+          },
+          {
+            timestamp: fDate2,
+            wvht: 0.45
+          }
+        ];
+
+        var r = h.compareBuoyReadings(epicSurfDate, fakeReadings);
+        expect(r.wvht).to.equal(4.10);
+
     });
   });
 });
