@@ -168,7 +168,7 @@ exports.listLogs = function(req, res) {
         // find number of sessions for current year
         // and build map of sessions by wave
         for(var i = 0; i < log.length; i++) {
-          var y = moment(log[i].timestamp).year();
+          var y = moment(log[i].date).year();
           if(y === currentYear) {
             surfSessionsThisYear++;
           }
