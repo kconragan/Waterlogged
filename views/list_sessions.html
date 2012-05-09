@@ -69,10 +69,19 @@
   </form>
 </section>
 {% if log %}
+<h1>{{ surfSessionsThisYear }}</h1>
+<h1>{{ allSurfSessions }}</h1>
 <ul>
 {% for sesh in log %}
   <li><a href="/logs/{{ sesh.id }}">{{ sesh.date }}</a></li>
 {% endfor %}
 </ul>
+{% endif %}
+{% if surfSeshByLoc %}
+{% for k, v in surfSeshByLoc %}
+  {% if v > 0%}
+  <li><a href="#" title="{{ v }}">{{ k }}</a><span class="count">{{ v }}</span></li>
+  {% endif %}
+{% endfor %}
 {% endif %}
 {% endblock %}

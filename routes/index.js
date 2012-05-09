@@ -148,22 +148,46 @@ exports.getWave = function(req, res) {
 };
 
 exports.listLogs = function(req, res) {
-  SurfSession.find(function(err, log){
-    Wave.find(function(err, waves) {
-      var surfHeight = SurfSession.schema.path('surfHeight').enumValues;
-      var surfConditions = SurfSession.schema.path('surfConditions').enumValues;
-      var surfStoke = new SurfSession().generateStoke();
-      console.log(surfStoke);
-      res.render('list_sessions.html', {
-        title: 'Latest Surf Sessions',
-        log: log,
-        waves: waves,
-        surfHeight: surfHeight,
-        surfConditions: surfConditions,
-        surfStoke: surfStoke
+  SurfSession.find()
+    .populate('location')
+    .run(function(err, log) {
+      // Get stuff required for building surf session form
+      Wave.find(function(err, waves) {
+        var surfHeight = SurfSession.schema.path('surfHeight').enumValues;
+        var surfConditions = SurfSession.schema.path('surfConditions').enumValues;
+        var surfStoke = new SurfSession().generateStoke();
+        var currentYear = moment().year();
+        var surfSessionsThisYear = 0;
+
+        // Object for mapping surf sessions to locations by count
+        var surfSeshByLoc = {};
+        waves.forEach(function(w) {
+          surfSeshByLoc[w.name] = 0;
+        });
+
+        // find number of sessions for current year
+        // and build map of sessions by wave
+        for(var i = 0; i < log.length; i++) {
+          var y = moment(log[i].timestamp).year();
+          if(y === currentYear) {
+            surfSessionsThisYear++;
+          }
+          var l = log[i].location.name;
+          surfSeshByLoc[l] = surfSeshByLoc[l] + 1;
+        }
+        res.render('list_sessions.html', {
+          title: 'Latest Surf Sessions',
+          log: log,
+          waves: waves,
+          surfSessionsThisYear: surfSessionsThisYear,
+          allSurfSessions: log.length,
+          surfSeshByLoc: surfSeshByLoc,
+          surfHeight: surfHeight,
+          surfConditions: surfConditions,
+          surfStoke: surfStoke
+        });
       });
     });
-  });
 };
 
 // Construct a SurfSession object and save
