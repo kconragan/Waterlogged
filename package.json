@@ -7,6 +7,7 @@
     "moment": "== 1.5.1",
     "mongoose": "== 2.5.13",
     "mongoose-auth": "== 0.0.12",
+    "everyauth": "== 0.2.32",
     "q": "== 0.8.2",
     "request": "== 2.9.202",
     "tzwhere": "== 0.0.5"

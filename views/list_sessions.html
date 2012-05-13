@@ -3,6 +3,7 @@
 {% block title %}{{ title }} {% endblock %}
 {% block body %}
 <section>
+  {% if everyauth.loggedIn %}
   <h1>Log a new session</h1>
   <form action="" method="post">
     <fieldset>
@@ -67,6 +68,7 @@
     </fieldset>
     <button>Create</button>
   </form>
+  {% endif %}
 </section>
 {% if log %}
 <h1>{{ surfSessionsThisYear }}</h1>

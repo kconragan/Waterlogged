@@ -220,15 +220,15 @@ var buoys = [
 var surfSessions: [
 	{
 		"location": "Montara",
-		"date": "Mon Mar 26 22:58:00 UTC 2012"
+		"date"    : "Mon Mar 26 22:58:00 UTC 2012"
 	},
 	{
 		"location": "Ocean Beach",
-		"date": "Fri Mar 23 18:58:00 UTC 2012"
+		"date"    : "Fri Mar 23 18:58:00 UTC 2012"
 	},
 	{
 		"location": "Ocean Beach",
-		"date": "Fri Mar 09 17:23:00 UTC 2012"
+		"date"    : "Fri Mar 09 17:23:00 UTC 2012"
 	},
 	{
 		"location": "Ocean Beach",
@@ -654,87 +654,87 @@ var surfSessions: [
 		"location": "Ocean Beach",
 		"date": "Wed Jan 26 15:58:00 UTC 2011"
 	},
-	{
-		"location": "Ocean Beach",
-		"date": "Tue Jan 25 15:58:00 UTC 2011"
-	},
-	{
-		"location": "Scott's Creek",
-		"date": "Sun Jan 23 22:43:00 UTC 2011"
-	},
-	{
-		"location": "North Point, Davenport",
-		"date": "Sat Jan 22 22:43:00 UTC 2011"
-	},
-	{
-		"location": "Ross's Cove",
-		"date": "Mon Jan 17 17:01:00 UTC 2011"
-	},
-	{
-		"location": "Ocean Beach",
-		"date": "Fri Jan 14 15:36:00 UTC 2011"
-	},
-	{
-		"location": "Ocean Beach",
-		"date": "Mon Jan 10 15:00:00 UTC 2011"
-	},
-	{
-		"location": "Kelly Street",
-		"date": "Sun Jan 09 18:56:00 UTC 2011"
-	},
-	{
-		"location": "Venice / Roosevelt",
-		"date": "Mon Jan 03 20:14:00 UTC 2011"
-	},
-	{
-		"location": "Privates",
-		"date": "Mon Jan 03 18:00:00 UTC 2011"
-	},
-	{
-		"location": "Ocean Beach",
-		"date": "Sun Sep 27 17:28:00 UTC 2009"
-	},
-	{
-		"location": "Ocean Beach",
-		"date": "Sat Sep 26 17:28:00 UTC 2009"
-	},
-	{
-		"location": "Privates",
-		"date": "Mon Sep 07 18:16:00 UTC 2009"
-	},
-	{
-		"location": "Ocean Beach",
-		"date": "Fri Aug 28 19:21:13 UTC 2009"
-	},
-	{
-		"location": "Ocean Beach",
-		"date": "Fri Aug 21 18:13:00 UTC 2009"
-	},
+	// {
+	// 	"location": "Ocean Beach",
+	// 	"date": "Tue Jan 25 15:58:00 UTC 2011"
+	// },
+	// {
+	// 	"location": "Scott's Creek",
+	// 	"date": "Sun Jan 23 22:43:00 UTC 2011"
+	// },
+	// {
+	// 	"location": "North Point, Davenport",
+	// 	"date": "Sat Jan 22 22:43:00 UTC 2011"
+	// },
+	// {
+	// 	"location": "Ross's Cove",
+	// 	"date": "Mon Jan 17 17:01:00 UTC 2011"
+	// },
+	// {
+	// 	"location": "Ocean Beach",
+	// 	"date": "Fri Jan 14 15:36:00 UTC 2011"
+	// },
+	// {
+	// 	"location": "Ocean Beach",
+	// 	"date": "Mon Jan 10 15:00:00 UTC 2011"
+	// },
+	// {
+	// 	"location": "Kelly Street",
+	// 	"date": "Sun Jan 09 18:56:00 UTC 2011"
+	// },
+	// {
+	// 	"location": "Venice / Roosevelt",
+	// 	"date": "Mon Jan 03 20:14:00 UTC 2011"
+	// },
+	// {
+	// 	"location": "Privates",
+	// 	"date": "Mon Jan 03 18:00:00 UTC 2011"
+	// },
+	// {
+	// 	"location": "Ocean Beach",
+	// 	"date": "Sun Sep 27 17:28:00 UTC 2009"
+	// },
+	// {
+	// 	"location": "Ocean Beach",
+	// 	"date": "Sat Sep 26 17:28:00 UTC 2009"
+	// },
+	// {
+	// 	"location": "Privates",
+	// 	"date": "Mon Sep 07 18:16:00 UTC 2009"
+	// },
+	// {
+	// 	"location": "Ocean Beach",
+	// 	"date": "Fri Aug 28 19:21:13 UTC 2009"
+	// },
+	// {
+	// 	"location": "Ocean Beach",
+	// 	"date": "Fri Aug 21 18:13:00 UTC 2009"
+	// },
 	{
 		"location": "Pomponio",
 		"date": "Tue Aug 18 21:12:31 UTC 2009"
 	},
-	{
-		"location": "Ocean Beach",
-		"date": "Sun Aug 16 21:09:00 UTC 2009"
-	},
-	{
-		"location": "Waddell Creek",
-		"date": "Sat Jul 25 20:58:00 UTC 2009"
-	},
-	{
-		"location": "Waddell Creek",
-		"date": "Sat Jun 27 19:22:00 UTC 2009"
-	},
-	{
-		"location": "Ocean Beach",
-		"date": "Sun Feb 08 00:25:31 UTC 2009",
-		"undefined": "6.0"
-	},
-	{
-		"location": "Natural Bridges",
-		"date": "Sun Feb 08 00:25:19 UTC 2009"
-	}
+	// {
+	// 	"location": "Ocean Beach",
+	// 	"date": "Sun Aug 16 21:09:00 UTC 2009"
+	// },
+	// {
+	// 	"location": "Waddell Creek",
+	// 	"date": "Sat Jul 25 20:58:00 UTC 2009"
+	// },
+	// {
+	// 	"location": "Waddell Creek",
+	// 	"date": "Sat Jun 27 19:22:00 UTC 2009"
+	// },
+	// {
+	// 	"location": "Ocean Beach",
+	// 	"date": "Sun Feb 08 00:25:31 UTC 2009",
+	// 	"undefined": "6.0"
+	// },
+	// {
+	// 	"location": "Natural Bridges",
+	// 	"date": "Sun Feb 08 00:25:19 UTC 2009"
+	// }
 ];
 
 var unimportedSurfSessions = [
