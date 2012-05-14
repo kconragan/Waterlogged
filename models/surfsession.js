@@ -34,6 +34,7 @@ var surfStoke = ['1', '2', '3', '4', '5'];
 
 var SurfSession = new Schema({
   date: Date,
+  user: {type : Schema.ObjectId, ref : 'User'},
   duration: Number, // In minutes
   location: {
     type: Schema.ObjectId,

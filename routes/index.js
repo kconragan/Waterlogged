@@ -203,7 +203,8 @@ exports.createSesh = function(req, res) {
   //Create new SurfSession and fill in relevant props
   var sesh = new SurfSession({
     date: seshDate._d,
-    location: d.wave
+    location: d.wave,
+    user: req.session.auth.userId
   });
 
   if(d.duration) {
@@ -273,6 +274,7 @@ exports.getLog = function(req, res) {
   SurfSession
     .findOne({ _id: req.params.id})
     .populate('location')
+    .populate('user')
     .run(function(err, sesh) {
       if(err) {
         throw err;
