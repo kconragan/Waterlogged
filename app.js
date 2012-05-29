@@ -48,7 +48,7 @@ UserSchema.plugin(mongooseAuth, {
         console.log(twitterUser);
         return promise;
       },
-      redirectPath: '/'
+      redirectPath: '/logs'
     }
   }
 });

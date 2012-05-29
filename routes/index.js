@@ -149,6 +149,7 @@ exports.getWave = function(req, res) {
 
 exports.listLogs = function(req, res) {
   SurfSession.find()
+    .sort('date', -1)
     .populate('location')
     .run(function(err, log) {
       // Get stuff required for building surf session form
@@ -174,6 +175,8 @@ exports.listLogs = function(req, res) {
           }
           var l = log[i].location.name;
           surfSeshByLoc[l] = surfSeshByLoc[l] + 1;
+          log[i].friendlyDate = moment(log[i].date).format('dddd, MMMM DD, YYYY @ H:mmA');
+          log[i].buoys.wvht = h.convertMetersToFeet(log[i].buoys.wvht);
         }
         res.render('list_sessions.html', {
           title: 'Latest Surf Sessions',
@@ -240,6 +243,15 @@ exports.createSesh = function(req, res) {
         h.parseBuoyData(wave.buoys[0].ndbcId, seshDate).then(function(data) {
           console.log('buoy data is ', data);
           if(data) {
+            if(data.wvht < 99) {
+              sesh.buoys.wvht = data.wvht;
+            }
+            if(data.dpd < 99) {
+              sesh.buoys.dpd = data.dpd;
+            }
+            if(data.mwd < 999) {
+              sesh.buoys.dpd = data.dpd;
+            }
            sesh.buoys = data;
           }
         })
